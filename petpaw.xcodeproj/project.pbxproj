@@ -14,6 +14,9 @@
 		9F9218583072BA2500A3D0A8 /* petpawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218573072BA2500A3D0A8 /* petpawTests.swift */; };
 		9F9218623072BA2500A3D0A8 /* petpawUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218613072BA2500A3D0A8 /* petpawUITests.swift */; };
 		9F9218643072BA2500A3D0A8 /* petpawUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218633072BA2500A3D0A8 /* petpawUITestsLaunchTests.swift */; };
+		9F9218793072BCD500A3D0A8 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218783072BCD500A3D0A8 /* colors.swift */; };
+		9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92187A3072BDB700A3D0A8 /* typography.swift */; };
+		9F92187F3072BF3100A3D0A8 /* spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92187E3072BF3100A3D0A8 /* spacing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		9F92185D3072BA2500A3D0A8 /* petpawUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = petpawUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9218613072BA2500A3D0A8 /* petpawUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petpawUITests.swift; sourceTree = "<group>"; };
 		9F9218633072BA2500A3D0A8 /* petpawUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petpawUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9F9218783072BCD500A3D0A8 /* colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
+		9F92187A3072BDB700A3D0A8 /* typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = typography.swift; sourceTree = "<group>"; };
+		9F92187E3072BF3100A3D0A8 /* spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spacing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,12 @@
 		9F92183A3072BA2100A3D0A8 = {
 			isa = PBXGroup;
 			children = (
+				9F9218773072BBE900A3D0A8 /* View */,
+				9F9218763072BBDD00A3D0A8 /* ViewModel */,
+				9F9218753072BBBE00A3D0A8 /* Services */,
+				9F9218743072BBB000A3D0A8 /* Resources */,
+				9F9218733072BBA300A3D0A8 /* Models */,
+				9F9218713072BB5700A3D0A8 /* Core */,
 				9F9218453072BA2100A3D0A8 /* petpaw */,
 				9F9218563072BA2500A3D0A8 /* petpawTests */,
 				9F9218603072BA2500A3D0A8 /* petpawUITests */,
@@ -94,6 +106,7 @@
 		9F9218453072BA2100A3D0A8 /* petpaw */ = {
 			isa = PBXGroup;
 			children = (
+				9F9218703072BB1F00A3D0A8 /* utilities */,
 				9F9218463072BA2100A3D0A8 /* petpawApp.swift */,
 				9F9218483072BA2100A3D0A8 /* ContentView.swift */,
 				9F92184A3072BA2400A3D0A8 /* Assets.xcassets */,
@@ -125,6 +138,66 @@
 				9F9218633072BA2500A3D0A8 /* petpawUITestsLaunchTests.swift */,
 			);
 			path = petpawUITests;
+			sourceTree = "<group>";
+		};
+		9F9218703072BB1F00A3D0A8 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = utilities;
+			sourceTree = "<group>";
+		};
+		9F9218713072BB5700A3D0A8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9F9218723072BB6B00A3D0A8 /* petpawTheme */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		9F9218723072BB6B00A3D0A8 /* petpawTheme */ = {
+			isa = PBXGroup;
+			children = (
+				9F9218783072BCD500A3D0A8 /* colors.swift */,
+				9F92187A3072BDB700A3D0A8 /* typography.swift */,
+				9F92187E3072BF3100A3D0A8 /* spacing.swift */,
+			);
+			path = petpawTheme;
+			sourceTree = "<group>";
+		};
+		9F9218733072BBA300A3D0A8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9F9218743072BBB000A3D0A8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9F9218753072BBBE00A3D0A8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9F9218763072BBDD00A3D0A8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9F9218773072BBE900A3D0A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +331,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */,
+				9F9218793072BCD500A3D0A8 /* colors.swift in Sources */,
+				9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */,
 				9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */,
+				9F92187F3072BF3100A3D0A8 /* spacing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
