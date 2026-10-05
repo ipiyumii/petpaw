@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct Login: View {
+    @Binding var isSignUp: Bool
     @State private var email = ""
-        @State private var password = ""
-        @State private var isPasswordVisible = false
-        @State private var isLoading = false
+    @State private var password = ""
+    @State private var isPasswordVisible = false
+    @State private var isLoading = false
     
     var body: some View{
         ZStack{
@@ -205,18 +206,21 @@ struct Login: View {
                     .padding(.horizontal, 24)
                     .padding(.top, 4)
 
-                    HStack(spacing: 6){
+                    Button(action: { isSignUp = true }) {
+                     HStack(spacing: 6){
                         Text("Don't have an account?")
                             .font(.system(size: 13, weight: .regular))
                             .foregroundColor(Color(red: 0.45, green: 0.50, blue: 0.55))
 
-                        NavigationLink(destination: Text("Sign Up")){
                             HStack(spacing: 3) {
                                 Text("Create one").font(.system(size: 13, weight: .bold))
                                 Image(systemName: "arrow.right").font(.system(size: 11, weight: .semibold))
                             }
-                        }
                         .foregroundColor(PetPawColors.primary)
+
+                        Spacer()
+                       
+                    }
                     }
                     .frame(maxWidth: .infinity)
                     
@@ -230,8 +234,7 @@ struct Login: View {
 
 }
 
-//#Preview {
-//    NavigationStack {
-//        Login()
-//    }
-//}
+#Preview {
+    @State var isSignUp = false
+    return Login(isSignUp: $isSignUp)
+}
