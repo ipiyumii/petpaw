@@ -18,6 +18,12 @@
 		9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92187A3072BDB700A3D0A8 /* typography.swift */; };
 		9F92187F3072BF3100A3D0A8 /* spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92187E3072BF3100A3D0A8 /* spacing.swift */; };
 		9F9218813072D00000A3D0A8 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218803072CFFF00A3D0A8 /* utilities.swift */; };
+		9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188A3073E6CE00A3D0A8 /* login.swift */; };
+		9F92188C3073E6CE00A3D0A8 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188A3073E6CE00A3D0A8 /* login.swift */; };
+		9F92188D3073E6CE00A3D0A8 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188A3073E6CE00A3D0A8 /* login.swift */; };
+		9F92188F3073E91100A3D0A8 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188E3073E91100A3D0A8 /* signup.swift */; };
+		9F9218903073E91100A3D0A8 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188E3073E91100A3D0A8 /* signup.swift */; };
+		9F9218913073E91100A3D0A8 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188E3073E91100A3D0A8 /* signup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +58,8 @@
 		9F92187A3072BDB700A3D0A8 /* typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = typography.swift; sourceTree = "<group>"; };
 		9F92187E3072BF3100A3D0A8 /* spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spacing.swift; sourceTree = "<group>"; };
 		9F9218803072CFFF00A3D0A8 /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
+		9F92188A3073E6CE00A3D0A8 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
+		9F92188E3073E91100A3D0A8 /* signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,8 +207,26 @@
 		9F9218773072BBE900A3D0A8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9F9218823073E4F100A3D0A8 /* screens */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9F9218823073E4F100A3D0A8 /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				9F9218893073E65100A3D0A8 /* Authentication */,
+			);
+			path = screens;
+			sourceTree = "<group>";
+		};
+		9F9218893073E65100A3D0A8 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				9F92188A3073E6CE00A3D0A8 /* login.swift */,
+				9F92188E3073E91100A3D0A8 /* signup.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +364,8 @@
 				9F9218793072BCD500A3D0A8 /* colors.swift in Sources */,
 				9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */,
 				9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */,
+				9F92188F3073E91100A3D0A8 /* signup.swift in Sources */,
+				9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */,
 				9F92187F3072BF3100A3D0A8 /* spacing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +374,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F9218903073E91100A3D0A8 /* signup.swift in Sources */,
 				9F9218583072BA2500A3D0A8 /* petpawTests.swift in Sources */,
+				9F92188C3073E6CE00A3D0A8 /* login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +385,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F9218623072BA2500A3D0A8 /* petpawUITests.swift in Sources */,
+				9F9218913073E91100A3D0A8 /* signup.swift in Sources */,
+				9F92188D3073E6CE00A3D0A8 /* login.swift in Sources */,
 				9F9218643072BA2500A3D0A8 /* petpawUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
