@@ -3,4 +3,54 @@
    uuid = "55340DB3-3FBF-49C7-9C78-C7804BB38F2E"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1A560F98-C0D8-42DB-A4FE-CBA3C1F545FF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Core/petpawTheme/colors.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "PetPawColors"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "1A560F98-C0D8-42DB-A4FE-CBA3C1F545FF - 2ea47452e88d2c85"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "one-time initialization function for bgLight"
+                  moduleName = "petpaw"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piyumiimalka/Desktop/IOS-CW/petpaw/Core/petpawTheme/colors.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "8">
+               </Location>
+               <Location
+                  uuid = "1A560F98-C0D8-42DB-A4FE-CBA3C1F545FF - cc510193c86d1a1b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "petpaw.PetPawColors.bgLight.unsafeMutableAddressor : SwiftUI.Color"
+                  moduleName = "petpaw"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piyumiimalka/Desktop/IOS-CW/petpaw/Core/petpawTheme/colors.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
