@@ -17,7 +17,7 @@ struct petpawApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Login()
         }
     }
 }
