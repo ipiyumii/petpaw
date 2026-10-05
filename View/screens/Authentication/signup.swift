@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct signup: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var isSignUp: Bool
     @State private var fullName = ""
     @State private var email = ""
     @State private var password = ""
@@ -62,7 +62,7 @@ struct signup: View {
             
             VStack(spacing: 0){
                 HStack{
-                    Button(action:{dismiss()}){
+                    Button(action:{isSignUp = false}){
                         HStack(spacing: 6) {
                             Image(systemName:"chevron.left").font(.system(size: 16, weight:.semibold))
                             Text("Back")
@@ -421,7 +421,7 @@ struct signup: View {
                         .padding(.horizontal, 20)
                         .padding(.top, 16)
                         
-                        NavigationLink(destination: Text("Login")) {
+                        Button(action:{isSignUp = false}) {
                             HStack(spacing: 8) {
                                 VStack(alignment: .leading, spacing: 2){
                                     Text("Already have an account?")
@@ -464,7 +464,7 @@ struct signup: View {
 }
 
 #Preview{
-    NavigationStack {
-        signup()
-    }
+   @State var isSignUp = true
+    return signup(isSignUp: $isSignUp)
 }
+

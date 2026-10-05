@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct petpawApp: App {
@@ -17,16 +18,50 @@ struct petpawApp: App {
     
     var body: some Scene {
         WindowGroup {
-            signup()
+            RootView()
         }
     }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: constants.CoreData.modelName)
+
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                print("Core Data loading error: \(error), \(error.userInfo)")
+            }
+        }
+
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        return container
+    }()
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         return true
+    }
+
+    // MARK: - Save Core Data
+    func saveContext() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                print("Core Data save error: \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+}
+
+extension NSManagedObjectContext {
+    static var current: NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
     }
 }
