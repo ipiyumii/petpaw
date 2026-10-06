@@ -20,7 +20,11 @@ class AuthViewModel: ObservableObject{
     @Published var signUpConfirmPassword = ""
     @Published var isSignUpLoading = false
     @Published var acceptedTerms = false
-    
+
+    @Published var loginEmail = ""
+    @Published var loginPassword = ""
+    @Published var isLoginLoading = false
+
     init() {
         isAuthenticated = Auth.auth().currentUser != nil
     }
@@ -67,6 +71,41 @@ class AuthViewModel: ObservableObject{
 
         guard acceptedTerms else {
             handleError("Please accept the terms and conditions")
+            return false
+        }
+
+        return true
+    }
+
+        func login() {
+        guard validateLoginInput() else { return }
+
+        isLoginLoading = true
+        authService.signIn(email: loginEmail, password: loginPassword) { [weak self] success in
+            self?.isLoginLoading = false
+            if success {
+                self?.isAuthenticated = true
+            } 
+            else 
+            {
+                self?.handleError(self?.authService.errorMsg ?? "Login failed")
+            }
+        }
+    }
+
+        private func validateLoginInput() -> Bool {
+        guard !loginEmail.isEmpty else {
+            handleError("Please enter your email")
+            return false
+        }
+
+        guard isValidEmail(loginEmail) else {
+            handleError("Please enter a valid email")
+            return false
+        }
+
+        guard !loginPassword.isEmpty else {
+            handleError("Please enter your password")
             return false
         }
 

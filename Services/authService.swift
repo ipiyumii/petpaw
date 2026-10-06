@@ -51,6 +51,24 @@ class AuthService: NSObject, ObservableObject{
             }
         }
     }
+
+        func signIn(email: String, password: String, completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        errorMsg = nil
+
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] _, error in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+
+                if let error = error {
+                    self?.errorMsg = self?.parseAuthError(error)
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        }
+    }
     
     private func saveUserToFirestore(uid: String, email: String, fullName: String, completion: @escaping (Bool) -> Void) {
         let userData: [String: Any] = [
