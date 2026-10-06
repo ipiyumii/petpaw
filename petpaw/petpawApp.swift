@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseAuth
 
 @main
 struct petpawApp: App {
@@ -52,6 +53,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         )
 
         Firestore.firestore().settings = settings
+        
+        if !UserDefaults.standard.bool(forKey: "appLaunchedBefore") {
+            do {
+                try Auth.auth().signOut()
+                        print("Signed out on first launch")
+                    } catch {
+                        print("Sign out error: \(error)")
+                    }
+                    UserDefaults.standard.set(true, forKey: "appLaunchedBefore")
+                }
 
         return true
     }

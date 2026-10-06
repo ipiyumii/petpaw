@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		9F0D24C63074325A00BCD900 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */; };
 		9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8CD3075580C00228A18 /* firebaseConfig.swift */; };
+		9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D0307574DD00228A18 /* addPetScreen.swift */; };
+		9F68D8D33075753500228A18 /* selectImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D23075753500228A18 /* selectImage.swift */; };
+		9F68D8D53075757D00228A18 /* welcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D43075757D00228A18 /* welcomeScreen.swift */; };
+		9F68D8D7307575BB00228A18 /* quoteFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D6307575BB00228A18 /* quoteFeature.swift */; };
+		9F68D8D9307575F300228A18 /* onbaording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D8307575F300228A18 /* onbaording.swift */; };
+		9F68D8DB3075791900228A18 /* dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8DA3075791900228A18 /* dashboard.swift */; };
 		9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218463072BA2100A3D0A8 /* petpawApp.swift */; };
 		9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218483072BA2100A3D0A8 /* ContentView.swift */; };
 		9F92184B3072BA2400A3D0A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F92184A3072BA2400A3D0A8 /* Assets.xcassets */; };
@@ -55,6 +61,12 @@
 /* Begin PBXFileReference section */
 		9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9F68D8CD3075580C00228A18 /* firebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseConfig.swift; sourceTree = "<group>"; };
+		9F68D8D0307574DD00228A18 /* addPetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPetScreen.swift; sourceTree = "<group>"; };
+		9F68D8D23075753500228A18 /* selectImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectImage.swift; sourceTree = "<group>"; };
+		9F68D8D43075757D00228A18 /* welcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcomeScreen.swift; sourceTree = "<group>"; };
+		9F68D8D6307575BB00228A18 /* quoteFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quoteFeature.swift; sourceTree = "<group>"; };
+		9F68D8D8307575F300228A18 /* onbaording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onbaording.swift; sourceTree = "<group>"; };
+		9F68D8DA3075791900228A18 /* dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dashboard.swift; sourceTree = "<group>"; };
 		9F9218433072BA2100A3D0A8 /* petpaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = petpaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9218463072BA2100A3D0A8 /* petpawApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petpawApp.swift; sourceTree = "<group>"; };
 		9F9218483072BA2100A3D0A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +115,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F68D8CF307574C000228A18 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9F68D8D0307574DD00228A18 /* addPetScreen.swift */,
+				9F68D8D23075753500228A18 /* selectImage.swift */,
+				9F68D8D43075757D00228A18 /* welcomeScreen.swift */,
+				9F68D8D6307575BB00228A18 /* quoteFeature.swift */,
+				9F68D8D8307575F300228A18 /* onbaording.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		9F92183A3072BA2100A3D0A8 = {
 			isa = PBXGroup;
 			children = (
@@ -228,7 +252,9 @@
 		9F9218823073E4F100A3D0A8 /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				9F68D8CF307574C000228A18 /* Onboarding */,
 				9F9218893073E65100A3D0A8 /* Authentication */,
+				9F68D8DA3075791900228A18 /* dashboard.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -387,11 +413,17 @@
 				9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */,
 				9F92188F3073E91100A3D0A8 /* signup.swift in Sources */,
 				9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */,
+				9F68D8D7307575BB00228A18 /* quoteFeature.swift in Sources */,
 				9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */,
+				9F68D8D9307575F300228A18 /* onbaording.swift in Sources */,
+				9F68D8D53075757D00228A18 /* welcomeScreen.swift in Sources */,
 				9F9E75F33074D89300E39EC9 /* authService.swift in Sources */,
 				9F9E75F530752D1300E39EC9 /* authViewModel.swift in Sources */,
+				9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */,
 				9FD5EDB230741E2D004A9E67 /* root.swift in Sources */,
 				9F92187F3072BF3100A3D0A8 /* spacing.swift in Sources */,
+				9F68D8DB3075791900228A18 /* dashboard.swift in Sources */,
+				9F68D8D33075753500228A18 /* selectImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
