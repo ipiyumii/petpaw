@@ -19,10 +19,15 @@ struct AuthenticationFlow: View {
     @State private var isSignUp = false
 
     var body: some View {
-        if isSignUp {
-            signup(isSignUp: $isSignUp)
-        } else {
-            Login(isSignUp: $isSignUp)
+        NavigationStack {
+            if isSignUp {
+                signup(isSignUp: $isSignUp)
+            } else {
+                Login(isSignUp: $isSignUp)
+                    .onAppear {
+                        isSignUp = false
+                    }
+            }
         }
     }
 }

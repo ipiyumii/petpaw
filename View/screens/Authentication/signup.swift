@@ -9,22 +9,13 @@ import SwiftUI
 
 struct signup: View {
     @Binding var isSignUp: Bool
-    @State private var fullName = ""
-    @State private var email = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
-    @State private var isLoading = false
-    @State private var animateIcon = false
     @State private var scaleEffect: CGFloat = 1.0
-    @State private var agreeToTerms = false
+    @StateObject private var viewModel = AuthViewModel()
     
-    var isPasswordValid: Bool {
-        password.count >= 6
-    }
     
     var isFormValid: Bool {
-        !fullName.isEmpty && !email.isEmpty && isPasswordValid &&
-        password == confirmPassword && agreeToTerms
+        !viewModel.signUpName.isEmpty && !viewModel.signUpEmail.isEmpty && viewModel.isPasswordValid(viewModel.signUpPassword) &&
+        viewModel.passwordsMatch(viewModel.signUpPassword, confirmPassword: viewModel.signUpConfirmPassword) && viewModel.acceptedTerms
     }
     
     
@@ -155,7 +146,7 @@ struct signup: View {
                                             .tracking(0.3)
                                     }
                                     
-                                    TextField("Your name", text: $fullName)
+                                    TextField("Your name", text: $viewModel.signUpName)
                                         .font(.system(size: 15, weight: .regular))
                                         .textContentType(.name)
                                         .foregroundColor(Color(red: 0.10, green: 0.13, blue: 0.16))
@@ -168,7 +159,7 @@ struct signup: View {
                                         )
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12).stroke(
-                                                fullName.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) : PetPawColors.primary,
+                                                viewModel.signUpName.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) : PetPawColors.primary,
                                                 lineWidth: 2
                                             )
                                         )
@@ -186,7 +177,7 @@ struct signup: View {
                                             .tracking(0.3)
                                     }
                                     
-                                    TextField("you@example.com", text: $email)
+                                    TextField("you@example.com", text: $viewModel.signUpEmail)
                                         .font(.system(size: 15, weight: .regular))
                                         .textContentType(.emailAddress)
                                         .keyboardType(.emailAddress)
@@ -201,7 +192,7 @@ struct signup: View {
                                         )
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12).stroke(
-                                                email.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) : PetPawColors.primary,
+                                                viewModel.signUpEmail.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) : PetPawColors.primary,
                                                 lineWidth: 2
                                             )
                                         )
@@ -236,7 +227,7 @@ struct signup: View {
                                     HStack(spacing: 8) {
                                         Image(systemName: "lock.fill")
                                             .font(.system(size: 13, weight: .semibold))
-                                            .foregroundColor(isPasswordValid && !password.isEmpty ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28).opacity(0.7))
+                                            .foregroundColor(viewModel.isPasswordValid(viewModel.signUpPassword) && !viewModel.signUpPassword.isEmpty ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28).opacity(0.7))
                                         
                                         Text("Password")
                                             .font(.system(size: 12, weight: .bold))
@@ -244,7 +235,7 @@ struct signup: View {
                                             .tracking(0.3)
                                     }
                                     
-                                    SecureField("At least 6 characters", text: $password)
+                                    SecureField("At least 6 characters", text: $viewModel.signUpPassword)
                                         .font(.system(size: 15, weight: .regular))
                                         .textContentType(.password)
                                         .foregroundColor(Color(red: 0.10, green: 0.13, blue: 0.16))
@@ -260,21 +251,21 @@ struct signup: View {
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12)
                                                 .stroke(
-                                                    password.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) :
-                                                        (isPasswordValid ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28)),
+                                                    viewModel.signUpPassword.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) :
+                                                        (viewModel.isPasswordValid(viewModel.signUpPassword) ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28)),
                                                     lineWidth: 2
                                                 )
                                         )
                                     
-                                    if !password.isEmpty{
+                                    if !viewModel.signUpPassword.isEmpty{
                                         HStack(spacing: 8){
-                                            Image(systemName: isPasswordValid ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                                            Image(systemName: viewModel.isPasswordValid(viewModel.signUpPassword) ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
                                                 .font(.system(size: 13, weight: .semibold))
-                                                .foregroundColor(isPasswordValid ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28))
+                                                .foregroundColor(viewModel.isPasswordValid(viewModel.signUpPassword) ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28))
                                             
-                                            Text(isPasswordValid ? "Password is strong" : "Minimum 6 characters")
+                                            Text(viewModel.isPasswordValid(viewModel.signUpPassword) ? "Password is strong" : "Minimum 6 characters")
                                                 .font(.system(size: 12, weight: .regular))
-                                                .foregroundColor(isPasswordValid ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28))
+                                                .foregroundColor(viewModel.isPasswordValid(viewModel.signUpPassword) ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28))
                                         }
                                         .padding(.horizontal, 4)
                                         .transition(.scale.combined(with: .opacity))
@@ -287,7 +278,7 @@ struct signup: View {
                                     HStack(spacing: 8){
                                         Image(systemName: "checkmark.circle.fill")
                                             .font(.system(size: 13, weight: .semibold))
-                                            .foregroundColor(password == confirmPassword && !confirmPassword.isEmpty ? PetPawColors.primary : Color(red: 0.90, green: 0.92, blue: 0.94))
+                                            .foregroundColor(viewModel.signUpPassword == viewModel.signUpConfirmPassword && !viewModel.signUpConfirmPassword.isEmpty ? PetPawColors.primary : Color(red: 0.90, green: 0.92, blue: 0.94))
                                         
                                         Text("Confirm Password")
                                             .font(.system(size: 12, weight: .bold))
@@ -295,7 +286,7 @@ struct signup: View {
                                             .tracking(0.3)
                                     }
                                     
-                                    SecureField("Re-enter password", text: $confirmPassword)
+                                    SecureField("Re-enter password", text: $viewModel.signUpConfirmPassword)
                                         .font(.system(size: 15, weight: .regular))
                                         .textContentType(.password)
                                         .foregroundColor(Color(red: 0.10, green: 0.13, blue: 0.16))
@@ -309,8 +300,8 @@ struct signup: View {
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12)
                                                 .stroke(
-                                                    confirmPassword.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) :
-                                                        (password == confirmPassword ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28)),
+                                                    viewModel.signUpConfirmPassword.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) :
+                                                        (viewModel.signUpPassword == viewModel.signUpConfirmPassword ? PetPawColors.primary : Color(red: 0.94, green: 0.28, blue: 0.28)),
                                                     lineWidth: 2
                                                 )
                                         )
@@ -326,13 +317,13 @@ struct signup: View {
                             VStack(spacing: 12){
                                 Button(action:{
                                     withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-                                        agreeToTerms.toggle()
+                                        viewModel.acceptedTerms.toggle()
                                     }
                                 }) { HStack(spacing: 12){
-                                    Image(systemName: agreeToTerms ? "checkmark.square.fill" : "square")
+                                    Image(systemName: viewModel.acceptedTerms ? "checkmark.square.fill" : "square")
                                         .font(.system(size: 20, weight: .semibold))
-                                        .foregroundColor(agreeToTerms ? PetPawColors.primary : Color(red: 0.90, green: 0.92, blue: 0.94))
-                                        .scaleEffect(agreeToTerms ? 1.15 : 1.0)
+                                        .foregroundColor(viewModel.acceptedTerms ? PetPawColors.primary : Color(red: 0.90, green: 0.92, blue: 0.94))
+                                        .scaleEffect(viewModel.acceptedTerms ? 1.15 : 1.0)
                                     
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text("I agree to the Terms & Conditions")
@@ -350,13 +341,13 @@ struct signup: View {
                                 .padding(14)
                                 .background(
                                     RoundedRectangle(cornerRadius: 12)
-                                        .fill(agreeToTerms ? PetPawColors.primary.opacity(0.08) : Color.white)
+                                        .fill(viewModel.acceptedTerms ? PetPawColors.primary.opacity(0.08) : Color.white)
                                         .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
                                         .stroke(
-                                            agreeToTerms ? PetPawColors.primary.opacity(0.3) : Color(red: 0.92, green: 0.93, blue: 0.95),
+                                            viewModel.acceptedTerms ? PetPawColors.primary.opacity(0.3) : Color(red: 0.92, green: 0.93, blue: 0.95),
                                             lineWidth: 1.5
                                         )
                                 )
@@ -372,11 +363,9 @@ struct signup: View {
                         .padding(.horizontal, 16)
                         
                         Button(action:{
-                            withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                                isLoading = true
-                            }
+                            viewModel.signUp()
                         })
-                        { if isLoading{
+                        { if viewModel.isSignUpLoading{
                             HStack(spacing: 10) {
                                 ProgressView()
                                     .tint(.white)
@@ -414,10 +403,14 @@ struct signup: View {
                         )
                         .cornerRadius(14)
                         .shadow(color: PetPawColors.primary.opacity(0.35),radius: 16,x: 0, y: 8)
-                        .disabled(!isFormValid || isLoading)
-                        .opacity(isFormValid && !isLoading ? 1.0 : 0.6)
+                        .disabled(!isFormValid || viewModel.isSignUpLoading)
+                        .opacity(isFormValid && !viewModel.isSignUpLoading ? 1.0 : 0.6)
                         .scaleEffect(isFormValid ? 1.0 : 0.97)
-                        
+                        .alert("error", isPresented: $viewModel.showError) {
+                            Button("ok") {viewModel.showError = false}
+                        } message: {
+                            Text(viewModel.errorMsg)
+                        }
                         .padding(.horizontal, 20)
                         .padding(.top, 16)
                         
@@ -465,6 +458,8 @@ struct signup: View {
 
 #Preview{
    @State var isSignUp = true
-    return signup(isSignUp: $isSignUp)
+    return NavigationStack {
+        signup(isSignUp: $isSignUp)
+    }
 }
 
