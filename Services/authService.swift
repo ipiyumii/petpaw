@@ -111,6 +111,14 @@ class AuthService: NSObject, ObservableObject{
         return error.localizedDescription
     }
 
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            errorMsg = nil
+        } catch let error {
+            errorMsg = error.localizedDescription
+        }
+    }
 }
     
     

@@ -146,4 +146,10 @@ class AuthViewModel: ObservableObject{
         acceptedTerms = false
     }
 
+    func signOut() {
+        authService.signOut()
+        isAuthenticated = false
+        clearLoginForm()
+        clearSignUpForm()
+    }
 }
