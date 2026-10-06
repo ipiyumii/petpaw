@@ -37,6 +37,7 @@ class AuthViewModel: ObservableObject{
             self?.isSignUpLoading = false
             if success {
                 self?.isAuthenticated = true
+                self?.clearSignUpForm()
             } else {
                 self?.handleError(self?.authService.errorMsg ?? "Sign up failed")
             }
@@ -85,6 +86,7 @@ class AuthViewModel: ObservableObject{
             self?.isLoginLoading = false
             if success {
                 self?.isAuthenticated = true
+                self?.clearLoginForm()
             } 
             else 
             {
@@ -131,5 +133,17 @@ class AuthViewModel: ObservableObject{
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
 
+    private func clearLoginForm() {
+        loginEmail = ""
+        loginPassword = ""
+    }
+
+    private func clearSignUpForm() {
+        signUpName = ""
+        signUpEmail = ""
+        signUpPassword = ""
+        signUpConfirmPassword = ""
+        acceptedTerms = false
+    }
 
 }
