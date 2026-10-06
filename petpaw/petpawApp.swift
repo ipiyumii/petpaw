@@ -7,14 +7,13 @@
 
 import SwiftUI
 import CoreData
+import FirebaseCore
+import FirebaseFirestore
 
 @main
 struct petpawApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    //firebase config
-    
     
     var body: some Scene {
         WindowGroup {
@@ -42,6 +41,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
+        }
+
+        let settings = FirestoreSettings()
+
+        settings.cacheSettings = PersistentCacheSettings(
+            sizeBytes: FirestoreCacheSizeUnlimited as NSNumber
+        )
+
+        Firestore.firestore().settings = settings
+
         return true
     }
 

@@ -9,10 +9,8 @@ import SwiftUI
 
 struct Login: View {
     @Binding var isSignUp: Bool
-    @State private var email = ""
-    @State private var password = ""
     @State private var isPasswordVisible = false
-    @State private var isLoading = false
+    @StateObject private var viewModel = AuthViewModel()
     
     var body: some View{
         ZStack{
@@ -95,7 +93,7 @@ struct Login: View {
                                     .tracking(0.4)
                             }
 
-                            TextField("you@example.com", text: $email)
+                            TextField("you@example.com", text: $viewModel.loginEmail)
                                 .font(.system(size: 15, weight: .regular))
                                 .textContentType(.emailAddress)
                                 .keyboardType(.emailAddress)
@@ -125,12 +123,12 @@ struct Login: View {
 
                             HStack(spacing: 12){
                                 if isPasswordVisible{
-                                    TextField("Password", text: $password)
+                                    TextField("Password", text: $viewModel.loginPassword)
                                         .font(.system(size: 15, weight: .regular))
                                         .textContentType(.password)
                                 } 
                                 else{
-                                    SecureField("Password", text: $password)
+                                    SecureField("Password", text: $viewModel.loginPassword)
                                         .font(.system(size: 15, weight: .regular))
                                         .textContentType(.password)
                                 }
@@ -153,7 +151,7 @@ struct Login: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(
-                                        password.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) : PetPawColors.primary,
+                                        viewModel.loginPassword.isEmpty ? Color(red: 0.92, green: 0.93, blue: 0.95) : PetPawColors.primary,
                                         lineWidth: 2
                                     )
                             )
@@ -172,8 +170,8 @@ struct Login: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
 
-                    Button(action: { isLoading = true }) {
-                        if isLoading {
+                    Button(action: { viewModel.login() }) {
+                        if viewModel.isLoginLoading {
                             HStack(spacing: 8) {
                                 ProgressView().tint(.white)
                                 Text("Signing in...").font(.system(size: 15, weight: .semibold))
@@ -201,8 +199,14 @@ struct Login: View {
                     )
                     .cornerRadius(13)
                     .shadow(color: PetPawColors.primary.opacity(0.3), radius: 10, x: 0, y: 5)
-                    .disabled(isLoading || email.isEmpty || password.isEmpty)
-                    .opacity((isLoading || email.isEmpty || password.isEmpty) ? 0.65 : 1.0)
+                    .disabled(viewModel.isLoginLoading || viewModel.loginEmail.isEmpty || viewModel.loginPassword.isEmpty)
+                    .opacity((viewModel.isLoginLoading || viewModel.loginEmail.isEmpty || viewModel.loginPassword.isEmpty) ? 0.65 : 1.0)
+                    .alert("Error", isPresented: $viewModel.showError){
+                        Button("Ok") {viewModel.showError = false}
+                    } message: {
+                        Text(viewModel.errorMsg)
+                    }
+                    
                     .padding(.horizontal, 24)
                     .padding(.top, 4)
 
@@ -235,6 +239,6 @@ struct Login: View {
 }
 
 #Preview {
-    @State var isSignUp = false
-    return Login(isSignUp: $isSignUp)
+   @State var isSignUp = false
+   return Login(isSignUp: $isSignUp)
 }
