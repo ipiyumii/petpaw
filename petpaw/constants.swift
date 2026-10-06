@@ -12,6 +12,14 @@ struct constants{
     
     struct CoreData {
         static let modelName = "PetPaw"
+    } 
+
+    struct Firebase {
+        static let projectID = "petpaw-health"
+        static let apiKey = ""
+        static let databaseURL = ""
+
+        static let usersCollection = "users"
     }
 }
 
