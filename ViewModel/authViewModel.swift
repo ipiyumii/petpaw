@@ -25,8 +25,11 @@ class AuthViewModel: ObservableObject{
     @Published var loginPassword = ""
     @Published var isLoginLoading = false
 
+    @Published var hasCompletedOnboarding = false
+
     init() {
         isAuthenticated = Auth.auth().currentUser != nil
+        hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "omboardingCompleted")
     }
 
     func signUp() {
@@ -149,7 +152,14 @@ class AuthViewModel: ObservableObject{
     func signOut() {
         authService.signOut()
         isAuthenticated = false
+        hasCompletedOnboarding = false
+        UserDefaults.standard.set(false, forKey: "onboardingCompleted")
         clearLoginForm()
         clearSignUpForm()
+    }
+
+    func completeOnboarding() {
+        hasCompletedOnboarding = true
+        UserDefaults.standard.set(true, forKey: "onboardingCompleted")
     }
 }

@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct RootView: View {
-    @State private var showSplash = true
+    @StateObject private var authViewModel = AuthViewModel()
 
     var body: some View {
+        if !authViewModel.isAuthenticated {
             AuthenticationFlow()
+                .environmentObject(authViewModel)
+        } else if !authViewModel.hasCompletedOnboarding {
+            OnboardingView()
+                .environmentObject(authViewModel)
+        } else {
+            dashboard()
+                .environmentObject(authViewModel)
+        }
     }
 }
 
 struct AuthenticationFlow: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isSignUp = false
 
     var body: some View {
