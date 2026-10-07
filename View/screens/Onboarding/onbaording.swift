@@ -21,6 +21,12 @@ struct OnboardingView: View {
                 AddPetScreen(currentStep: $currentStep, selectedPetImage: $selectedPetImage, showImagePicker: $showImagePicker)
             } else if currentStep == 2 {
                 quoteFeature(currentStep: $currentStep).environmentObject(authViewModel)
+            } else if currentStep == 3 {
+                dashboard()
+                    .environmentObject(authViewModel)
+                    .onAppear {
+                        authViewModel.completeOnboarding()
+                    }
             }
         }
         .sheet(isPresented: $showImagePicker) {
