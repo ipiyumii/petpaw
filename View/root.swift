@@ -18,7 +18,7 @@ struct RootView: View {
             OnboardingView()
                 .environmentObject(authViewModel)
         } else {
-            dashboard()
+             MainTabView()
                 .environmentObject(authViewModel)
         }
     }
