@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject var AuthViewModel: AuthViewModel
     @State private var selectedTab: AppTab = .home
 
     var body: some View {
@@ -35,6 +36,7 @@ struct MainTabView: View {
     private var blankPet: Pet {
             Pet(
                 id: UUID().uuidString,
+                ownerId: AuthViewModel.authService.currentUser?.uid ?? "",
                 name: "",
                 species: "",
                 breed: nil,

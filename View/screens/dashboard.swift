@@ -9,6 +9,7 @@ import SwiftUI
 
 struct dashboard: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var showProfile = false
 
     var body: some View {
         ZStack {
@@ -23,6 +24,25 @@ struct dashboard: View {
             .ignoresSafeArea()
 
             VStack(spacing: 20) {
+
+                HStack {
+                    Spacer()
+
+                    Button(action: { showProfile = true }) {
+                        Image(systemName: "person.crop.circle.fill")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(PetPawColors.primary)
+                            .frame(width: 40, height: 40)
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .shadow(color: PetPawColors.shadowLight, radius: 4, x: 0, y: 2)
+                    }
+                    .accessibilityLabel("Your profile")
+                    .accessibilityHint("Double-tap to view and edit your profile")
+                }
+                .padding(.horizontal, Spacing.lg)
+                .padding(.top, Spacing.sm)
+                
                 VStack(spacing: 12) {
                     Text("Welcome! 🐾")
                         .font(.system(size: 32, weight: .bold))
@@ -61,6 +81,9 @@ struct dashboard: View {
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
             }
+        }
+        .sheet(isPresented: $showProfile) {
+            UserProfileScreen()
         }
     }
 }

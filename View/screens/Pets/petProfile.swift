@@ -504,7 +504,8 @@ private struct PetInfoCard<Content: View>: View {
 #Preview("Blank") {
     PetProfile(
         pet: Pet(
-            id: "new",
+            id: "",
+            ownerId: "",
             name: "",
             species: "",
             breed: nil,
@@ -520,9 +521,10 @@ private struct PetInfoCard<Content: View>: View {
     PetProfile(
         pet: Pet(
             id: "1",
-            name: "Puffy",
-            species: "Dog",
-            breed: "Shih tzu",
+            ownerId: "",
+            name: "",
+            species: "",
+            breed: "",
             dateOfBirth: Calendar.current.date(
                 byAdding: .year,
                 value: -3,
