@@ -201,12 +201,13 @@ struct UserProfileScreen: View {
             ) {
                 if editingField == .fullName {
                     TextField("Full name", text: fullNameBinding)
+                        .foregroundColor(PetPawColors.textPrimary)
                         .focused($focusedField, equals: .fullName)
                         .onSubmit { editingField = nil }
                 } else {
                     let name = viewModel.profile?.fullName ?? ""
                     Text(name.isEmpty ? "Not set" : name)
-                        .foregroundColor(name.isEmpty ? PetPawColors.textTertiary : PetPawColors.text)
+                        .foregroundColor(name.isEmpty ? PetPawColors.textTertiary : PetPawColors.textPrimary)
                 }
             }
 
@@ -219,13 +220,14 @@ struct UserProfileScreen: View {
             ) {
                 if editingField == .phoneNumber {
                     TextField("Phone number", text: phoneNumberBinding)
+                        .foregroundColor(PetPawColors.textPrimary)
                         .keyboardType(.phonePad)
                         .focused($focusedField, equals: .phoneNumber)
                         .onSubmit { editingField = nil }
                 } else {
                     let phone = viewModel.profile?.phoneNumber ?? ""
                     Text(phone.isEmpty ? "Not set" : phone)
-                        .foregroundColor(phone.isEmpty ? PetPawColors.textTertiary : PetPawColors.text)
+                        .foregroundColor(phone.isEmpty ? PetPawColors.textTertiary : PetPawColors.textPrimary)
                 }
             }
 
@@ -235,12 +237,13 @@ struct UserProfileScreen: View {
             ) {
                 if editingField == .bio {
                     TextField("Tell us about yourself", text: bioBinding, axis: .vertical)
+                        .foregroundColor(PetPawColors.textPrimary)
                         .lineLimit(3...5)
                         .focused($focusedField, equals: .bio)
                 } else {
                     let bio = viewModel.profile?.bio ?? ""
                     Text(bio.isEmpty ? "Tap to write a short bio" : bio)
-                        .foregroundColor(bio.isEmpty ? PetPawColors.textTertiary : PetPawColors.text)
+                        .foregroundColor(bio.isEmpty ? PetPawColors.textTertiary : PetPawColors.textPrimary)
                 }
             }
         }
@@ -463,7 +466,7 @@ private struct ProfileDetailCard<Value: View>: View {
 
                 value
                     .font(PetPawTypography.body.weight(.semibold))
-                    .foregroundColor(PetPawColors.text)
+                    .foregroundColor(PetPawColors.textPrimary)
             }
 
             Spacer()
@@ -530,7 +533,7 @@ private struct ProfileBioCard<Value: View>: View {
 
             value
                 .font(PetPawTypography.body)
-                .foregroundColor(PetPawColors.text)
+                .foregroundColor(PetPawColors.textPrimary)
         }
         .padding(Spacing.md)
         .background(

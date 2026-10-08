@@ -10,7 +10,8 @@ import SwiftUI
 struct Login: View {
     @Binding var isSignUp: Bool
     @State private var isPasswordVisible = false
-    @StateObject private var viewModel = AuthViewModel()
+//    @StateObject private var viewModel = AuthViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View{
         ZStack{
@@ -240,5 +241,5 @@ struct Login: View {
 
 #Preview {
    @State var isSignUp = false
-   return Login(isSignUp: $isSignUp)
+    return Login(isSignUp: $isSignUp).environmentObject(AuthViewModel())
 }

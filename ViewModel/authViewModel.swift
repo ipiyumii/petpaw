@@ -152,8 +152,6 @@ class AuthViewModel: ObservableObject{
     func signOut() {
         authService.signOut()
         isAuthenticated = false
-        hasCompletedOnboarding = false
-        UserDefaults.standard.set(false, forKey: "onboardingCompleted")
         clearLoginForm()
         clearSignUpForm()
     }
