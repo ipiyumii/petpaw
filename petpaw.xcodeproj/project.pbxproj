@@ -13,6 +13,7 @@
 		9F06D5213077B77300B191AD /* profileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5203077B77300B191AD /* profileViewModel.swift */; };
 		9F06D5263077B81200B191AD /* errorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5253077B81200B191AD /* errorState.swift */; };
 		9F06D5283077C4D000B191AD /* userProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5273077C4D000B191AD /* userProfileScreen.swift */; };
+		9F06D52C307811D300B191AD /* bioMetricService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D52B307811D300B191AD /* bioMetricService.swift */; };
 		9F0D24C63074325A00BCD900 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */; };
 		9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8CD3075580C00228A18 /* firebaseConfig.swift */; };
 		9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D0307574DD00228A18 /* addPetScreen.swift */; };
@@ -76,6 +77,7 @@
 		9F06D5203077B77300B191AD /* profileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewModel.swift; sourceTree = "<group>"; };
 		9F06D5253077B81200B191AD /* errorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = errorState.swift; sourceTree = "<group>"; };
 		9F06D5273077C4D000B191AD /* userProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfileScreen.swift; sourceTree = "<group>"; };
+		9F06D52B307811D300B191AD /* bioMetricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bioMetricService.swift; sourceTree = "<group>"; };
 		9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9F68D8CD3075580C00228A18 /* firebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseConfig.swift; sourceTree = "<group>"; };
 		9F68D8D0307574DD00228A18 /* addPetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPetScreen.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			children = (
 				9F06D51C3077B6FB00B191AD /* Data */,
 				9F9E75F23074D89300E39EC9 /* authService.swift */,
+				9F06D52B307811D300B191AD /* bioMetricService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 			files = (
 				9F06D5283077C4D000B191AD /* userProfileScreen.swift in Sources */,
 				9F06D5213077B77300B191AD /* profileViewModel.swift in Sources */,
+				9F06D52C307811D300B191AD /* bioMetricService.swift in Sources */,
 				9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */,
 				9F9218793072BCD500A3D0A8 /* colors.swift in Sources */,
 				9F06D51B3077B6E800B191AD /* userProfile.swift in Sources */,
@@ -704,6 +708,7 @@
 				DEVELOPMENT_TEAM = 3D3KVDMTWG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -733,6 +738,7 @@
 				DEVELOPMENT_TEAM = 3D3KVDMTWG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

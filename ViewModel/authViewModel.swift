@@ -9,10 +9,11 @@ import Foundation
 import FirebaseAuth
 
 class AuthViewModel: ObservableObject{
-    @Published var authService = AuthService()
+    let authService = AuthService()
     @Published var isAuthenticated = false
     @Published var showError = false
     @Published var errorMsg = ""
+    @Published var isUlocked = false
 
     @Published var signUpName = ""
     @Published var signUpEmail = ""
@@ -29,7 +30,7 @@ class AuthViewModel: ObservableObject{
 
     init() {
         isAuthenticated = Auth.auth().currentUser != nil
-        hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "omboardingCompleted")
+        hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "onboardingCompleted")
     }
 
     func signUp() {
@@ -152,6 +153,7 @@ class AuthViewModel: ObservableObject{
     func signOut() {
         authService.signOut()
         isAuthenticated = false
+        isUlocked = false
         clearLoginForm()
         clearSignUpForm()
     }
