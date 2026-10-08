@@ -15,6 +15,11 @@ final class ProfileViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     private var originalProfile: UserProfile?
+    private let service: UserProfileServiceProtocol
+
+    init(service: UserProfileServiceProtocol = UserProfileService()) {
+        self.service = service
+    }
 
     var hasUnsavedChanges: Bool {
         guard let profile = profile else { return false }
@@ -26,7 +31,18 @@ final class ProfileViewModel: ObservableObject {
     }
 
     func loadProfile(uid: String) async {
-        // todo
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let fetched = try await service.fetchProfile(uid: uid)
+            profile = fetched
+            originalProfile = fetched
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+
+        isLoading = false
     }
 
     func save() async -> Bool {
@@ -43,6 +59,7 @@ final class ProfileViewModel: ObservableObject {
         errorMessage = nil
 
         do {
+            try await service.updateProfile(profile)
             originalProfile = profile
             isSaving = false
             return true
