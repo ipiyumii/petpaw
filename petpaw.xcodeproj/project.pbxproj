@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		9F06D5173076D99800B191AD /* tabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5163076D99800B191AD /* tabBarView.swift */; };
+		9F06D51B3077B6E800B191AD /* userProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D51A3077B6E800B191AD /* userProfile.swift */; };
+		9F06D51E3077B70C00B191AD /* userProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D51D3077B70C00B191AD /* userProfileService.swift */; };
+		9F06D5213077B77300B191AD /* profileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5203077B77300B191AD /* profileViewModel.swift */; };
+		9F06D5263077B81200B191AD /* errorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5253077B81200B191AD /* errorState.swift */; };
+		9F06D5283077C4D000B191AD /* userProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5273077C4D000B191AD /* userProfileScreen.swift */; };
 		9F0D24C63074325A00BCD900 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */; };
 		9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8CD3075580C00228A18 /* firebaseConfig.swift */; };
 		9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D0307574DD00228A18 /* addPetScreen.swift */; };
@@ -66,6 +71,11 @@
 
 /* Begin PBXFileReference section */
 		9F06D5163076D99800B191AD /* tabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarView.swift; sourceTree = "<group>"; };
+		9F06D51A3077B6E800B191AD /* userProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfile.swift; sourceTree = "<group>"; };
+		9F06D51D3077B70C00B191AD /* userProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfileService.swift; sourceTree = "<group>"; };
+		9F06D5203077B77300B191AD /* profileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewModel.swift; sourceTree = "<group>"; };
+		9F06D5253077B81200B191AD /* errorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = errorState.swift; sourceTree = "<group>"; };
+		9F06D5273077C4D000B191AD /* userProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfileScreen.swift; sourceTree = "<group>"; };
 		9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9F68D8CD3075580C00228A18 /* firebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseConfig.swift; sourceTree = "<group>"; };
 		9F68D8D0307574DD00228A18 /* addPetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPetScreen.swift; sourceTree = "<group>"; };
@@ -135,6 +145,30 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		9F06D51C3077B6FB00B191AD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9F06D51D3077B70C00B191AD /* userProfileService.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9F06D51F3077B75D00B191AD /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9F06D5203077B77300B191AD /* profileViewModel.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		9F06D5243077B80300B191AD /* States */ = {
+			isa = PBXGroup;
+			children = (
+				9F06D5253077B81200B191AD /* errorState.swift */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
 		9F68D8CF307574C000228A18 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				9F68D8EC3076C96C00228A18 /* todoScreen.swift */,
+				9F06D5273077C4D000B191AD /* userProfileScreen.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -250,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				9FD88C683076D169006AE849 /* pet.swift */,
+				9F06D51A3077B6E800B191AD /* userProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,6 +300,7 @@
 		9F9218753072BBBE00A3D0A8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9F06D51C3077B6FB00B191AD /* Data */,
 				9F9E75F23074D89300E39EC9 /* authService.swift */,
 			);
 			path = Services;
@@ -272,6 +309,7 @@
 		9F9218763072BBDD00A3D0A8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9F06D51F3077B75D00B191AD /* Features */,
 				9FD88C6C3076D1F2006AE849 /* Pet */,
 				9F9E75F430752D1300E39EC9 /* authViewModel.swift */,
 			);
@@ -281,6 +319,7 @@
 		9F9218773072BBE900A3D0A8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9F06D5243077B80300B191AD /* States */,
 				9F68D8E63076C66100228A18 /* Components */,
 				9F9218823073E4F100A3D0A8 /* screens */,
 				9FD5EDB130741E2D004A9E67 /* root.swift */,
@@ -464,8 +503,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F06D5283077C4D000B191AD /* userProfileScreen.swift in Sources */,
+				9F06D5213077B77300B191AD /* profileViewModel.swift in Sources */,
 				9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */,
 				9F9218793072BCD500A3D0A8 /* colors.swift in Sources */,
+				9F06D51B3077B6E800B191AD /* userProfile.swift in Sources */,
+				9F06D5263077B81200B191AD /* errorState.swift in Sources */,
 				9FD5EDB6307424E7004A9E67 /* constants.swift in Sources */,
 				9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */,
 				9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */,
@@ -473,6 +516,7 @@
 				9F92188F3073E91100A3D0A8 /* signup.swift in Sources */,
 				9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */,
 				9F68D8D7307575BB00228A18 /* quoteFeature.swift in Sources */,
+				9F06D51E3077B70C00B191AD /* userProfileService.swift in Sources */,
 				9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */,
 				9F68D8D9307575F300228A18 /* onbaording.swift in Sources */,
 				9F68D8D53075757D00228A18 /* welcomeScreen.swift in Sources */,

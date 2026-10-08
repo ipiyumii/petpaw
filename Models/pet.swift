@@ -15,6 +15,7 @@ enum PetSex: String, Codable, CaseIterable {
 
 struct Pet: Codable, Equatable, Identifiable {
     var id: String
+    var ownerId: String
     var name: String
     var species: String
     var breed: String?
