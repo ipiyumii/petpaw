@@ -27,9 +27,22 @@ struct MainTabView: View {
                 todoScreen(tab: .health)
             case .reminders:
                 todoScreen(tab: .reminders)
-            case .profile:
-                todoScreen(tab: .profile)
+            case .pets:
+                PetProfile(pet: blankPet)
         }
+    }
+    
+    private var blankPet: Pet {
+            Pet(
+                id: UUID().uuidString,
+                name: "",
+                species: "",
+                breed: nil,
+                dateOfBirth: nil,
+                sex: .unknown,
+                weightKg: 0,
+                photoURL: nil
+            )
     }
 }
 
