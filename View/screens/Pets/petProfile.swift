@@ -447,15 +447,10 @@ private struct PetAvatarView: View {
             Image(uiImage: selectedPhoto)
                 .resizable()
                 .scaledToFill()
-        } else if let photoURLString,
-                  let url = URL(string: photoURLString) {
-            AsyncImage(url: url) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-            } placeholder: {
-                placeholder
-            }
+        } else if let photoURLString, let image = UIImage(dataURLString: photoURLString) {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
         } else {
             placeholder
         }
@@ -556,4 +551,4 @@ private struct PetInfoCard<Content: View>: View {
     )
         .environmentObject(PetsViewModel())
     }
-}
+

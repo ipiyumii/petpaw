@@ -69,15 +69,11 @@ struct PetSwitcherView: View {
         
         @ViewBuilder
         private var avatarImage: some View {
-            if let photoURLString = pet.photoURL, let url = URL(string: photoURLString) {
-                AsyncImage(url: url) { phase in
-                    if let image = phase.image {
-                        image.resizable().scaledToFill()
-                    } else {
-                        placeholder
-                    }
-                }
-            } 
+            if let photoURLString = pet.photoURL, let image = UIImage(dataURLString: photoURLString) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+            }
             else {
                 placeholder
             }
@@ -136,4 +132,3 @@ struct PetSwitcherView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(PetPawColors.primaryBg)
     }
-

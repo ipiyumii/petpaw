@@ -50,6 +50,10 @@ final class PetProfileViewModel: ObservableObject {
         errorMessage = nil
 
         do {
+            if let selectedPhoto{
+                let photoURL = try await service.uploadPhoto(selectedPhoto, petId: pet.id)
+                pet.photoURL = photoURL
+            }
             if isNewPet {
                 try await service.createPet(pet)
             } else {
