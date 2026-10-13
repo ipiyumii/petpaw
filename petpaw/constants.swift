@@ -20,6 +20,7 @@ struct constants{
         static let databaseURL = ""
 
         static let usersCollection = "users"
+        static let petsCollection = "pets"
     }
 }
 

@@ -10,13 +10,50 @@ import SwiftUI
 struct MainTabView: View {
     @EnvironmentObject var AuthViewModel: AuthViewModel
     @State private var selectedTab: AppTab = .home
+    @StateObject private var petViewModel = PetsViewModel()
+    @State private var showPetSwitcher = false
+    @State private var showAddPet = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            selectedScreen.frame(maxWidth: .infinity, maxHeight: .infinity)
+        ZStack(alignment: .bottom) {
+            VStack(spacing: 0) {
+                selectedScreen.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    TabBarView(selectedTab: $selectedTab, onPetTap: togglePetSwitcher)
+            }
+            if showPetSwitcher {
+                Color.black.opacity(0.001).ignoresSafeArea().onTapGesture {
+                    togglePetSwitcher()
+                    }
 
-            TabBarView(selectedTab: $selectedTab)
+                VStack { 
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        PetSwitcherView(
+                            pets: petViewModel.pets,    
+                            selectedPetId: petViewModel.selectedPet?.id,
+                            onSelect: selectPet,
+                            onAddPet: startAddPet
+                        ).fixedSize(horizontal: true, vertical: false)
+                    }
+                    .padding(.bottom, 84)
+                }
+
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+
         }
+        .environmentObject(petViewModel)
+        .sheet(isPresented: $showAddPet) {
+            NavigationStack {
+               PetProfile(pet: blankPet, isNewPet: true)
+            }
+            .environmentObject(petViewModel)
+        }.task {
+            await petViewModel.loadPets(ownerId: AuthViewModel.authService.currentUser?.uid ?? "")
+        }
+        
     }
 
     @ViewBuilder
@@ -29,8 +66,27 @@ struct MainTabView: View {
             case .reminders:
                 todoScreen(tab: .reminders)
             case .pets:
-                PetProfile(pet: blankPet)
+            PetProfile(
+                pet: petViewModel.selectedPet ?? blankPet,isNewPet: petViewModel.selectedPet == nil)
+                .id(petViewModel.selectedPet?.id ?? "blank")
         }
+    }
+
+    private func togglePetSwitcher() {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+            showPetSwitcher.toggle()
+        }
+    }
+
+    private func selectPet(_ pet: Pet) {
+        petViewModel.select(pet)
+        selectedTab = .pets
+        togglePetSwitcher()
+    }
+
+    private func startAddPet() {
+        togglePetSwitcher()
+        showAddPet = true
     }
     
     private var blankPet: Pet {

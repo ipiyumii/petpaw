@@ -40,6 +40,9 @@
 		9F92188F3073E91100A3D0A8 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188E3073E91100A3D0A8 /* signup.swift */; };
 		9F9218903073E91100A3D0A8 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188E3073E91100A3D0A8 /* signup.swift */; };
 		9F9218913073E91100A3D0A8 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92188E3073E91100A3D0A8 /* signup.swift */; };
+		9F96572E307D58C2001AE28A /* petService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96572D307D58C2001AE28A /* petService.swift */; };
+		9F965730307D59E8001AE28A /* petsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F96572F307D59E8001AE28A /* petsViewModel.swift */; };
+		9F965734307D6D67001AE28A /* petSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F965733307D6D67001AE28A /* petSwitcherView.swift */; };
 		9F9E75EF3074CC8500E39EC9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9F9E75EE3074CC8500E39EC9 /* FirebaseAuth */; };
 		9F9E75F13074CC8500E39EC9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F9E75F03074CC8500E39EC9 /* FirebaseFirestore */; };
 		9F9E75F33074D89300E39EC9 /* authService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E75F23074D89300E39EC9 /* authService.swift */; };
@@ -103,6 +106,9 @@
 		9F92187E3072BF3100A3D0A8 /* spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spacing.swift; sourceTree = "<group>"; };
 		9F92188A3073E6CE00A3D0A8 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		9F92188E3073E91100A3D0A8 /* signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signup.swift; sourceTree = "<group>"; };
+		9F96572D307D58C2001AE28A /* petService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petService.swift; sourceTree = "<group>"; };
+		9F96572F307D59E8001AE28A /* petsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petsViewModel.swift; sourceTree = "<group>"; };
+		9F965733307D6D67001AE28A /* petSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petSwitcherView.swift; sourceTree = "<group>"; };
 		9F9E75F23074D89300E39EC9 /* authService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authService.swift; sourceTree = "<group>"; };
 		9F9E75F430752D1300E39EC9 /* authViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authViewModel.swift; sourceTree = "<group>"; };
 		9FD5EDB130741E2D004A9E67 /* root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = root.swift; sourceTree = "<group>"; };
@@ -151,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				9F06D51D3077B70C00B191AD /* userProfileService.swift */,
+				9F96572D307D58C2001AE28A /* petService.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -186,6 +193,7 @@
 		9F68D8E63076C66100228A18 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9F965733307D6D67001AE28A /* petSwitcherView.swift */,
 				9F06D5153076D93400B191AD /* Navigation */,
 			);
 			path = Components;
@@ -356,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				9FD88C6D3076D202006AE849 /* petProfileViewModel.swift */,
+				9F96572F307D59E8001AE28A /* petsViewModel.swift */,
 			);
 			path = Pet;
 			sourceTree = "<group>";
@@ -528,10 +537,13 @@
 				9F9E75F33074D89300E39EC9 /* authService.swift in Sources */,
 				9F9E75F530752D1300E39EC9 /* authViewModel.swift in Sources */,
 				9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */,
+				9F965730307D59E8001AE28A /* petsViewModel.swift in Sources */,
+				9F965734307D6D67001AE28A /* petSwitcherView.swift in Sources */,
 				9FD5EDB230741E2D004A9E67 /* root.swift in Sources */,
 				9FD88C6E3076D202006AE849 /* petProfileViewModel.swift in Sources */,
 				9F92187F3072BF3100A3D0A8 /* spacing.swift in Sources */,
 				9F68D8DB3075791900228A18 /* dashboard.swift in Sources */,
+				9F96572E307D58C2001AE28A /* petService.swift in Sources */,
 				9FD88C693076D169006AE849 /* pet.swift in Sources */,
 				9FD88C713076D29F006AE849 /* petProfile.swift in Sources */,
 				9F68D8D33075753500228A18 /* selectImage.swift in Sources */,

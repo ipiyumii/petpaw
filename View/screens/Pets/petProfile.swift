@@ -18,6 +18,7 @@ private enum PetField {
 
 struct PetProfile: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var petsViewModel: PetsViewModel
     @StateObject private var viewModel: PetProfileViewModel
 
     @State private var editingField: PetField?
@@ -26,7 +27,7 @@ struct PetProfile: View {
 
     init(pet: Pet) {
         _viewModel = StateObject(
-            wrappedValue: PetProfileViewModel(pet: pet)
+            wrappedValue: PetProfileViewModel(pet: pet, isNewPet: isNewPet)
         )
     }
 
@@ -355,17 +356,23 @@ struct PetProfile: View {
             handleSave()
         } label: {
             HStack {
-                Image(systemName: "checkmark.circle.fill")
-                Text("Save")
+                if viewModel.isSaving {
+                    ProgressView()
+                        .tint(.white)
+                } else {
+                    Image(systemName: "checkmark.circle.fill")
+                    
+                    Text("Save")
+                        .font(PetPawTypography.button)
+                }
             }
-            .font(PetPawTypography.button)
             .frame(maxWidth: .infinity)
             .frame(height: 54)
             .foregroundColor(.white)
             .background(PetPawColors.primary)
             .cornerRadius(14)
         }
-        .disabled(!viewModel.hasAnyInput)
+        .disabled(!viewModel.hasAnyInput || viewModel.isSaving)
         .opacity(viewModel.hasAnyInput ? 1 : 0.5)
     }
 
@@ -392,9 +399,19 @@ struct PetProfile: View {
     }
 
     private func handleSave() {
-        if viewModel.save() {
-            editingField = nil
-            focusedField = nil
+        Task {
+            if await viewModel.save() {
+                editingField = nil
+                focusedField = nil
+                
+                if viewModel.isNewPet {
+                    petsViewModel.addPet(viewModel.pet)
+                } else {
+                    petsViewModel.replacePet(viewModel.pet)
+                }
+                
+                dismiss()
+            }
         }
     }
 }
@@ -430,15 +447,10 @@ private struct PetAvatarView: View {
             Image(uiImage: selectedPhoto)
                 .resizable()
                 .scaledToFill()
-        } else if let photoURLString,
-                  let url = URL(string: photoURLString) {
-            AsyncImage(url: url) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-            } placeholder: {
-                placeholder
-            }
+        } else if let photoURLString, let image = UIImage(dataURLString: photoURLString) {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
         } else {
             placeholder
         }
@@ -454,12 +466,12 @@ private struct PetAvatarView: View {
         }
     }
 }
-
+    
 private struct PetBadgeChip: View {
     let icon: String
     let text: String
     let color: Color
-
+        
     var body: some View {
         HStack {
             Image(systemName: icon)
@@ -513,8 +525,10 @@ private struct PetInfoCard<Content: View>: View {
             sex: .unknown,
             weightKg: 0,
             photoURL: nil
-        )
+        ),
+        isNewPet: true
     )
+    .environmentObject(PetsViewModel())
 }
 
 #Preview("Filled") {
@@ -535,4 +549,6 @@ private struct PetInfoCard<Content: View>: View {
             photoURL: nil
         )
     )
-}
+        .environmentObject(PetsViewModel())
+    }
+

@@ -5,7 +5,7 @@
 //  Created by Piyumi Imalka on 2026-10-08.
 //
 
-import Foundation
+import UIKit
 
 enum PetSex: String, Codable, CaseIterable {
     case male = "Male"
@@ -27,5 +27,14 @@ struct Pet: Codable, Equatable, Identifiable {
     var ageInYears: Int? {
         guard let dateOfBirth else { return nil }
         return Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year
+    }
+}
+
+extension UIImage {
+    convenience init?(dataURLString: String) {
+        guard let commaIndex = dataURLString.firstIndex(of: ","),
+              let data = Data(base64Encoded: String(dataURLString[dataURLString.index(after: commaIndex)...]))
+        else { return nil }
+        self.init(data: data)
     }
 }
