@@ -25,7 +25,7 @@ struct PetProfile: View {
     @State private var weightText = ""
     @FocusState private var focusedField: PetField?
 
-    init(pet: Pet) {
+    init(pet: Pet, isNewPet: Bool = false) {
         _viewModel = StateObject(
             wrappedValue: PetProfileViewModel(pet: pet, isNewPet: isNewPet)
         )

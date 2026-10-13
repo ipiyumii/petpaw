@@ -60,7 +60,7 @@ struct MainTabView: View {
     private var selectedScreen: some View {
         switch selectedTab{
             case .home:
-                dashboard()
+                dashboard(onSelectTab: navigate)
             case .health:
                 todoScreen(tab: .health)
             case .reminders:
@@ -101,6 +101,12 @@ struct MainTabView: View {
                 weightKg: 0,
                 photoURL: nil
             )
+    }
+    
+    private func navigate(to tab: AppTab) {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
+            selectedTab = tab
+        }
     }
 }
 
