@@ -13,9 +13,14 @@ final class PetProfileViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var selectedPhoto: UIImage?
     @Published var showPhotoPicker = false
+    @Published var isSaving = false
+    let isNewPet: Bool
+    private let service: PetServiceProtocol
 
-    init(pet: Pet) {
+    init(pet: Pet, isNewPet: Bool, service: PetServiceProtocol = PetService()) {
         self.pet = pet
+        self.isNewPet = isNewPet
+        self.service = service
     }
 
     var hasAnyInput: Bool {
@@ -28,8 +33,9 @@ final class PetProfileViewModel: ObservableObject {
     }
 
     @discardableResult
-    func save() -> Bool {
-        guard !pet.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+    func save() async -> Bool {
+        let trimmedName = pet.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty else {
             errorMessage = "Please enter a name"
             return false
         }
@@ -39,7 +45,25 @@ final class PetProfileViewModel: ObservableObject {
             return false
         }
 
+        pet.name = trimmedName
+        isSaving = true
         errorMessage = nil
-        return true
+
+        do {
+            if isNewPet {
+                try await service.createPet(pet)
+            } else {
+                try await service.updatePet(pet)
+            }
+
+            isSaving = false
+
+            return true
+            
+            } catch {
+                errorMessage = error.localizedDescription
+                isSaving = false
+                return false
+            }
     }
 }
