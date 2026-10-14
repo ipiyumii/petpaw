@@ -14,6 +14,8 @@ struct dashboard: View {
     @StateObject private var profileViewModel = ProfileViewModel()
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var onSelectTab: (AppTab) -> Void = { _ in }
+    var onScanHealth: () -> Void={}
+    var onAddRecord:() -> Void={}
 
     var body: some View {
         ZStack {
@@ -227,10 +229,10 @@ struct dashboard: View {
 
             LazyVGrid(columns: gridColumns, spacing: Spacing.sm) {
                 QuickActionButton(icon: "viewfinder", title: "Scan Health", color: PetPawColors.primary) {
-                    onSelectTab(.health)
+                    onScanHealth()
                 }
                 QuickActionButton(icon: "plus.circle.fill", title: "Add Record", color: PetPawColors.attention) {
-                    onSelectTab(.health)
+                    onAddRecord()
                 }
                 QuickActionButton(icon: "scalemass.fill", title: "Weight", color: PetPawColors.info) {
                     onSelectTab(.pets)

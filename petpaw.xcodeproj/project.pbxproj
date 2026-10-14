@@ -47,6 +47,9 @@
 		9F9E75F13074CC8500E39EC9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F9E75F03074CC8500E39EC9 /* FirebaseFirestore */; };
 		9F9E75F33074D89300E39EC9 /* authService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E75F23074D89300E39EC9 /* authService.swift */; };
 		9F9E75F530752D1300E39EC9 /* authViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E75F430752D1300E39EC9 /* authViewModel.swift */; };
+		9FD173C6307EBFF8006571D8 /* cameraCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173C5307EBFF8006571D8 /* cameraCapture.swift */; };
+		9FD173C8307EC123006571D8 /*  healthScanTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173C7307EC123006571D8 /*  healthScanTab.swift */; };
+		9FD173CA307FAAFC006571D8 /* healthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173C9307FAAFC006571D8 /* healthScreen.swift */; };
 		9FD5EDB230741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB330741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB430741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
@@ -111,6 +114,9 @@
 		9F965733307D6D67001AE28A /* petSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petSwitcherView.swift; sourceTree = "<group>"; };
 		9F9E75F23074D89300E39EC9 /* authService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authService.swift; sourceTree = "<group>"; };
 		9F9E75F430752D1300E39EC9 /* authViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authViewModel.swift; sourceTree = "<group>"; };
+		9FD173C5307EBFF8006571D8 /* cameraCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraCapture.swift; sourceTree = "<group>"; };
+		9FD173C7307EC123006571D8 /*  healthScanTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " healthScanTab.swift"; sourceTree = "<group>"; };
+		9FD173C9307FAAFC006571D8 /* healthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthScreen.swift; sourceTree = "<group>"; };
 		9FD5EDB130741E2D004A9E67 /* root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = root.swift; sourceTree = "<group>"; };
 		9FD5EDB5307424E7004A9E67 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		9FD88C683076D169006AE849 /* pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet.swift; sourceTree = "<group>"; };
@@ -342,6 +348,7 @@
 		9F9218823073E4F100A3D0A8 /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				9FD173C4307EBFCA006571D8 /* Health */,
 				9FD88C6F3076D245006AE849 /* Pets */,
 				9F68D8EB3076C95800228A18 /* Features */,
 				9F68D8CF307574C000228A18 /* Onboarding */,
@@ -358,6 +365,16 @@
 				9F92188E3073E91100A3D0A8 /* signup.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		9FD173C4307EBFCA006571D8 /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				9FD173C5307EBFF8006571D8 /* cameraCapture.swift */,
+				9FD173C7307EC123006571D8 /*  healthScanTab.swift */,
+				9FD173C9307FAAFC006571D8 /* healthScreen.swift */,
+			);
+			path = Health;
 			sourceTree = "<group>";
 		};
 		9FD88C6C3076D1F2006AE849 /* Pet */ = {
@@ -518,9 +535,11 @@
 				9F06D5283077C4D000B191AD /* userProfileScreen.swift in Sources */,
 				9F06D5213077B77300B191AD /* profileViewModel.swift in Sources */,
 				9F06D52C307811D300B191AD /* bioMetricService.swift in Sources */,
+				9FD173CA307FAAFC006571D8 /* healthScreen.swift in Sources */,
 				9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */,
 				9F9218793072BCD500A3D0A8 /* colors.swift in Sources */,
 				9F06D51B3077B6E800B191AD /* userProfile.swift in Sources */,
+				9FD173C8307EC123006571D8 /*  healthScanTab.swift in Sources */,
 				9F06D5263077B81200B191AD /* errorState.swift in Sources */,
 				9FD5EDB6307424E7004A9E67 /* constants.swift in Sources */,
 				9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */,
@@ -528,6 +547,7 @@
 				9F68D8ED3076C96D00228A18 /* todoScreen.swift in Sources */,
 				9F92188F3073E91100A3D0A8 /* signup.swift in Sources */,
 				9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */,
+				9FD173C6307EBFF8006571D8 /* cameraCapture.swift in Sources */,
 				9F68D8D7307575BB00228A18 /* quoteFeature.swift in Sources */,
 				9F06D51E3077B70C00B191AD /* userProfileService.swift in Sources */,
 				9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */,
