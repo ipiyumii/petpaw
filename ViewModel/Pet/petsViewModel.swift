@@ -27,16 +27,25 @@ class PetsViewModel: ObservableObject {
             return
         }
 
-        isLoading = true
+        pets = service.fetchLocalPets(pwnerId: ownerId)
+        if selectedPet == nil {
+            selectedPet = pets.first
+        }
+
+        isLoading = pets.isEmpty
         errorMessage = nil
 
         do {
             let result = try await service.fetchPets(ownerId: ownerId)
             pets = result
 
-            if pets.count > 0 && selectedPet == nil {
-                selectedPet = pets[0]
+            if selectedPet == nil || !result.contains(where:
+            {
+                $0.id == selectedPet?.id
+            }) {
+                selectedPet = result.first
             }
+            service.saveLocally(_pets: result)
 
         } catch {
             errorMessage = error.localizedDescription
@@ -52,6 +61,7 @@ class PetsViewModel: ObservableObject {
     func addPet(_ pet: Pet) {
         pets.append(pet)
         selectedPet = pet
+        service.saveLocally(_pets: [pet])
     }
 
     func replacePet(_ pet: Pet) {
@@ -63,5 +73,8 @@ class PetsViewModel: ObservableObject {
                 return
             }
         }
+        pets.append(pet)
+        selectedPet = pet
+        service.saveLocally(_pets: [pet])
     }
 }
