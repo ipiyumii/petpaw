@@ -134,9 +134,9 @@ struct HealthScreen: View {
                     }
                 )
 
-            case .scan:HealthScanTab()
+            case .scan: HealthScanTab()
 
-            case .records:HealthRecordsSection()
+            case .records: HealthRecordsSection()
         }
     }
 }
@@ -146,14 +146,21 @@ struct HealthOverviewSection: View {
 
     var onStartScan: () -> Void
     var onEditWeight: () -> Void
-
+    private let observationService = HealthObservationService()
+    @State private var latestObservation: HealthObservation?
+    
     var body: some View {
-        VStack(spacing: Spacing.md) 
+        VStack(spacing: Spacing.md)
         {
             overallHealthCard
             recentObservationCard
             weightCard
             recordsSummary
+        }
+        .task {
+            if let petId = petsViewModel.selectedPet?.id {
+                latestObservation = observationService.fetchObservations(petId: petId).first
+            }
         }
     }
 
@@ -196,7 +203,7 @@ struct HealthOverviewSection: View {
     }
 
     var recentObservationCard: some View {
-        VStack(alignment: .leading, spacing: Spacing.sm){
+        VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("Recent observation")
                 .font(PetPawTypography.h3)
                 .foregroundColor(PetPawColors.textPrimary)
@@ -204,12 +211,50 @@ struct HealthOverviewSection: View {
             Button {
                 onStartScan()
             } label: {
-                HStack(spacing: Spacing.md)
-                 {
+                if let observation = latestObservation {
+                    let isConcern = observation.condition.lowercased().contains("concern")
+                    
+                    HStack(spacing: Spacing.md) {
+                        ZStack {
+                            Circle()
+                                .fill(
+                                    (isConcern ? PetPawColors.warning : PetPawColors.success)
+                                        .opacity(0.12)
+                                )
+                                .frame(width: 44, height: 44)
+                            
+                            Image(systemName: isConcern ? "exclamationmark.triangle.fill" : "checkmark.circle.fill")
+                                .foregroundColor(isConcern ? PetPawColors.warning : PetPawColors.success)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("\(observation.area) check · \(isConcern ? "Mild concern" : "Normal")")
+                                .font(PetPawTypography.body.weight(.semibold))
+                                .foregroundColor(PetPawColors.textPrimary)
+                            
+                            Text(observation.createdAt.formatted(date: .abbreviated, time: .omitted))
+                                .font(PetPawTypography.caption)
+                                .foregroundColor(PetPawColors.textTertiary)
+                        }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(PetPawColors.textTertiary.opacity(0.5))
+                    }
+                    .padding(Spacing.md)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .fill(Color.white)
+                    )
+                    .shadow(color: PetPawColors.shadowLight, radius: 8, x: 0, y: 4)
+                } else {
+                    HStack(spacing: Spacing.md) {
+                        ZStack {
                     Circle()
                         .fill(PetPawColors.attention.opacity(0.12))
                         .frame(width: 44, height: 44)
-                        .overlay {
                             Image(systemName: "sparkle.magnifyingglass")
                                 .foregroundColor(PetPawColors.attention)
                         }
@@ -231,10 +276,13 @@ struct HealthOverviewSection: View {
                         .foregroundColor(PetPawColors.primary)
                 }
                 .padding(Spacing.md)
-                .background(Color.white)
-                .cornerRadius(20)
+                .background(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .fill(Color.white)
+                )
                 .shadow(color: PetPawColors.shadowLight, radius: 8, x: 0, y: 4)
             }
+        }
             .buttonStyle(.plain)
         }
     }
@@ -331,7 +379,7 @@ struct ComingSoonRow: View {
     var subtitle: String? = nil
 
     var body: some View {
-        HStack(spacing: Spacing.md) 
+        HStack(spacing: Spacing.md)
         {
             Circle()
                 .fill(iconColor.opacity(0.12))

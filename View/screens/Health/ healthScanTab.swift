@@ -68,8 +68,10 @@ struct HealthScanTab: View {
     @State private var isAnalyzing = false
     @State private var showResult = false
     @State private var scanResult: HealthScanResult?
+    @EnvironmentObject var petViewModel: PetsViewModel
 
     private let service : HealthAnalysisServiceProtocol = HealthAnalysisService()
+    private let observationService = HealthObservationService()
 
     var currentStep: ScanStep {
         if showResult {
@@ -325,70 +327,228 @@ struct HealthScanTab: View {
     }
 
     var resultCard: some View {
-        VStack(spacing: Spacing.lg) {
+        VStack(alignment: .leading, spacing: Spacing.lg) {
+            observationBanner
+
             if let capturedImage = capturedImage 
             {
-                Image(uiImage: capturedImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 220)
-                    .frame(maxWidth: .infinity)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
+        VStack(spacing: Spacing.xs) {
+            Image(uiImage: capturedImage)
+                .resizable()
+                .scaledToFill()
+                .frame(height: 200)
+                .frame(maxWidth: .infinity)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
 
-            VStack(spacing: Spacing.sm){
-                Circle()
-                    .fill(PetPawColors.primary.opacity(0.12))
-                    .frame(width: 56, height: 56)
-                    .overlay {
-                        Image(systemName: selectedArea.icon)
-                            .font(.system(size: 22))
-                            .foregroundColor(PetPawColors.primary)
-                    }
+                Text("Scanned photo · \(selectedArea.rawValue)")
+            .font(PetPawTypography.caption)
+            .foregroundColor(PetPawColors.textTertiary)
+        }
+    }
 
-                Text("\(selectedArea.rawValue) check saved")
-                    .font(PetPawTypography.h3)
-                    .foregroundColor(PetPawColors.textPrimary)
+        HStack(spacing: Spacing.sm) {
+            resultPill(icon: "viewfinder", text: "Area: \(selectedArea.rawValue)")
+        }
 
-if let scanResult {
-                    let isConcern = scanResult.condition.lowercased().contains("concern")
-                    let percent = Int(scanResult.confidence * 100)
+        detectionsSection
+        recommendedActionsSection
 
-                    Text(isConcern
-                        ? "\(selectedArea.rawValue) condtion detected: \(percent)% confidence"
-                        : "\(selectedArea.rawValue) looks normal: \(percent)% confidence")
-                        .font(PetPawTypography.body.weight(.semibold))
-                        .foregroundColor(isConcern ? PetPawColors.warning : PetPawColors.success)
-                        .multilineTextAlignment(.center)
-
-                    Text(isConcern
-                        ? "Monitor for changes and consult your vet if it worsens."
-                        : "No obvious signs of concern — keep an eye out for changes.")
-                        .font(PetPawTypography.caption)
-                        .foregroundColor(PetPawColors.textTertiary)
-                        .multilineTextAlignment(.center)
-                } 
-            }
-            .padding(Spacing.lg)
-            .frame(maxWidth: .infinity)
-            .background(Color.white)
-            .cornerRadius(20)
-            .shadow(color: PetPawColors.shadowLight, radius: 8, x: 0, y: 4)
-
-            Button 
-            {
-                reset()
-            } label: {
-                Text("Done")
-                    .font(PetPawTypography.button)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 54)
-                    .background(PetPawColors.primary)
-                    .cornerRadius(16)
+        Button(action: saveToRecords) {
+            Text("Save to records")
+                .font(PetPawTypography.button)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .frame(height: 54)
+                .background(PetPawColors.primary)
+                .cornerRadius(16)
             }
         }
     }
+
+
+private var isConcern: Bool {
+    if let result = scanResult 
+    {
+        return result.condition.lowercased().contains("concern")
+    }
+    return false
+}
+
+private var observationBanner: some View {
+    HStack(alignment: .top, spacing: Spacing.sm) {
+        Image(systemName: scanResult == nil ? "questionmark.circle.fill" :
+            (isConcern ? "exclamationmark.triangle.fill" : "checkmark.circle.fill")).font(.system(size: 20))
+
+            .foregroundColor(
+                scanResult == nil ? PetPawColors.textTertiary : (isConcern ? PetPawColors.warning : PetPawColors.success)
+            )
+
+        VStack(alignment: .leading, spacing: 2) {
+            if scanResult != nil 
+            {
+                Text(isConcern ?
+                     "Possible \(selectedArea.rawValue.lowercased()) irritation" :
+                     "\(selectedArea.rawValue) looks normal")
+                    .font(PetPawTypography.body.weight(.semibold))
+                    .foregroundColor(PetPawColors.textPrimary)
+
+                Text("Observation · not a diagnosis")
+                    .font(PetPawTypography.caption.weight(.semibold))
+                    .foregroundColor(isConcern ? PetPawColors.warning : PetPawColors.success)
+
+                if isConcern 
+                {
+                    Text("Mild redness or irritation may be present. Monitor for changes and consult your vet if it worsens.")
+                        .font(PetPawTypography.caption)
+                        .foregroundColor(PetPawColors.textSecondary)
+                } else {
+                    Text("No obvious signs of concern were noticed. Keep an eye out for any changes.")
+                        .font(PetPawTypography.caption)
+                        .foregroundColor(PetPawColors.textSecondary)
+                }
+            } else {
+                Text("Automated analysis isn't available in this version yet. Share this photo with your vet to get it checked.")
+                    .font(PetPawTypography.bodySmall)
+                    .foregroundColor(PetPawColors.textSecondary)
+            }
+        }
+    }
+    .padding(Spacing.md)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background(
+        RoundedRectangle(cornerRadius: 18, style: .continuous)
+            .fill(
+                (scanResult == nil ? PetPawColors.textTertiary : (isConcern ? PetPawColors.warning : PetPawColors.success)).opacity(0.12)
+            )
+    )
+}
+
+private func resultPill(icon: String, text: String) -> some View {
+    HStack(spacing: Spacing.xs) {
+        Image(systemName: icon).font(.system(size: 11, weight: .semibold))
+        Text(text).font(PetPawTypography.caption.weight(.semibold))
+    }
+    .foregroundColor(PetPawColors.primary)
+    .padding(.horizontal, Spacing.sm)
+    .padding(.vertical, 6)
+    .background(PetPawColors.primary.opacity(0.12))
+    .clipShape(Capsule())
+}
+
+private var detectionsSection: some View {
+    VStack(alignment: .leading, spacing: Spacing.sm) {
+        Text("Detections")
+            .font(PetPawTypography.h3)
+            .foregroundColor(PetPawColors.textPrimary)
+
+        if let result = scanResult {
+            let percent = Int(result.confidence * 100)
+
+            HStack(spacing: Spacing.md) {
+                ZStack {
+                    Circle()
+                        .fill(
+                            (isConcern ? PetPawColors.warning : PetPawColors.success)
+                                .opacity(0.12)
+                        )
+                        .frame(width: 44, height: 44)
+
+                    Image(systemName: selectedArea.icon)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(isConcern ? PetPawColors.warning : PetPawColors.success)
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("\(selectedArea.rawValue) · \(isConcern ? "possible irritation" : "looks normal")")
+                        .font(PetPawTypography.body.weight(.semibold))
+                        .foregroundColor(PetPawColors.textPrimary)
+
+                    Text("\(percent)% confidence · Vision + Core ML")
+                        .font(PetPawTypography.caption)
+                        .foregroundColor(PetPawColors.textTertiary)
+                }
+
+                Spacer()
+
+                Text("\(percent)%")
+                    .font(PetPawTypography.caption.weight(.bold))
+                    .foregroundColor(isConcern ? PetPawColors.warning : PetPawColors.success)
+                    .padding(.horizontal, Spacing.sm)
+                    .padding(.vertical, 4)
+                    .background(
+                        (isConcern ? PetPawColors.warning : PetPawColors.success).opacity(0.15)
+                    )
+                    .clipShape(Capsule())
+            }
+            .padding(Spacing.md)
+            .background(
+                RoundedRectangle(cornerRadius: 18, style: .continuous).fill(Color.white)
+            )
+            .shadow(color: PetPawColors.shadowLight, radius: 6, x: 0, y: 3)
+        }
+    }
+}
+
+private var recommendedActionsSection: some View {
+    VStack(alignment: .leading, spacing: Spacing.sm){
+        Text("Recommended actions")
+            .font(PetPawTypography.h3)
+            .foregroundColor(PetPawColors.textPrimary)
+
+        ForEach(recommendedActions, id: \.self) { action in
+            HStack(spacing: Spacing.sm) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(PetPawColors.success)
+
+                Text(action)
+                    .font(PetPawTypography.bodySmall)
+                    .foregroundColor(PetPawColors.textPrimary)
+
+                Spacer()
+            }
+            .padding(Spacing.md)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.white)
+            )
+            .shadow(color: PetPawColors.shadowLight, radius: 4, x: 0, y: 2)
+        }
+    }
+}
+
+private var recommendedActions: [String] {
+    if isConcern 
+    {
+        return [
+            "Keep the area clean and dry",
+            "Avoid excessive scratching or licking",
+            "Recheck in a few days and log a new scan",
+            "Consult your vet if it persists or worsens"
+        ]
+    }
+
+    return[
+        "No action needed right now",
+        "Keep up your regular grooming routine",
+        "Recheck periodically or after any changes",
+        "Log a new scan anytime something looks different"
+    ]
+}
+
+private func saveToRecords() {
+    if let petId = petViewModel.selectedPet?.id {
+        observationService.save(
+            petId: petId,
+            area: selectedArea.rawValue,
+            condition: scanResult?.condition ?? "unknown",
+            confidence: scanResult?.confidence ?? 0,
+            photo: capturedImage
+        )
+    }
+
+    reset()
+}
+
 
     func reset() 
     {
@@ -403,4 +563,5 @@ if let scanResult {
     ScrollView {
         HealthScanTab().padding(Spacing.lg)
     }
+    .environmentObject(PetsViewModel())
 }
