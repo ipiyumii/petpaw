@@ -13,6 +13,7 @@ struct MainTabView: View {
     @StateObject private var petViewModel = PetsViewModel()
     @State private var showPetSwitcher = false
     @State private var showAddPet = false
+    @State private var healthSegment: HealthSegment = .overview
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -60,9 +61,9 @@ struct MainTabView: View {
     private var selectedScreen: some View {
         switch selectedTab{
             case .home:
-                dashboard()
+                dashboard(onSelectTab: navigate, onScanHealth: goToScan, onAddRecord: goToRecords)
             case .health:
-                todoScreen(tab: .health)
+                HealthScreen(segment: $healthSegment, onSelectTab: navigate)
             case .reminders:
                 todoScreen(tab: .reminders)
             case .pets:
@@ -101,6 +102,24 @@ struct MainTabView: View {
                 weightKg: 0,
                 photoURL: nil
             )
+    }
+    
+    private func navigate(to tab: AppTab) {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
+            selectedTab = tab
+        }
+    }
+
+    private func goToScan() 
+    {
+        healthSegment = .scan
+        navigate(to: .health)
+    }
+
+    private func goToRecords() 
+    {
+        healthSegment = .records
+        navigate(to: .health)
     }
 }
 
