@@ -67,6 +67,9 @@ struct HealthScanTab: View {
     @State private var showLibraryPicker = false
     @State private var isAnalyzing = false
     @State private var showResult = false
+    @State private var scanResult: HealthScanResult?
+
+    private let service : HealthAnalysisServiceProtocol = HealthAnalysisService()
 
     var currentStep: ScanStep {
         if showResult {
@@ -278,7 +281,7 @@ struct HealthScanTab: View {
                     Text("Analysing…")
                 } else {
                     Image(systemName: "sparkles")
-                    Text("Analyse with Core ML")
+                    Text("Analyse my pet")
                 }
             }
             .font(PetPawTypography.button)
@@ -299,12 +302,23 @@ struct HealthScanTab: View {
     }
 
     func analyse() {
+        guard let capturedImage = capturedImage else {
+            return
+        }
+
         isAnalyzing = true
+        let startTime = Date()
 
-        Task 
-        {
-            try? await Task.sleep(nanoseconds: 1_200_000_000)
-
+        Task {
+            let result = try? await service.analyze(capturedImage)
+            let minimumduration = 4.0
+            let elapsed = Date().timeIntervalSince(startTime)
+            
+            if elapsed < minimumduration
+            {
+                try? await Task.sleep(nanoseconds: UInt64((minimumduration-elapsed) * 1_000_000_000))
+            }
+            scanResult = result
             isAnalyzing = false
             showResult = true
         }
@@ -335,6 +349,25 @@ struct HealthScanTab: View {
                 Text("\(selectedArea.rawValue) check saved")
                     .font(PetPawTypography.h3)
                     .foregroundColor(PetPawColors.textPrimary)
+
+if let scanResult {
+                    let isConcern = scanResult.condition.lowercased().contains("concern")
+                    let percent = Int(scanResult.confidence * 100)
+
+                    Text(isConcern
+                        ? "\(selectedArea.rawValue) condtion detected: \(percent)% confidence"
+                        : "\(selectedArea.rawValue) looks normal: \(percent)% confidence")
+                        .font(PetPawTypography.body.weight(.semibold))
+                        .foregroundColor(isConcern ? PetPawColors.warning : PetPawColors.success)
+                        .multilineTextAlignment(.center)
+
+                    Text(isConcern
+                        ? "Monitor for changes and consult your vet if it worsens."
+                        : "No obvious signs of concern — keep an eye out for changes.")
+                        .font(PetPawTypography.caption)
+                        .foregroundColor(PetPawColors.textTertiary)
+                        .multilineTextAlignment(.center)
+                } 
             }
             .padding(Spacing.lg)
             .frame(maxWidth: .infinity)
@@ -362,6 +395,7 @@ struct HealthScanTab: View {
         capturedImage = nil
         selectedArea = .skin
         showResult = false
+        scanResult = nil
     }
 }
 
