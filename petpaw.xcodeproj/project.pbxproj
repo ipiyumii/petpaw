@@ -50,6 +50,8 @@
 		9FD173C6307EBFF8006571D8 /* cameraCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173C5307EBFF8006571D8 /* cameraCapture.swift */; };
 		9FD173C8307EC123006571D8 /*  healthScanTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173C7307EC123006571D8 /*  healthScanTab.swift */; };
 		9FD173CA307FAAFC006571D8 /* healthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173C9307FAAFC006571D8 /* healthScreen.swift */; };
+		9FD173D0307FD47C006571D8 /* healthAnalysisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173CF307FD47C006571D8 /* healthAnalysisService.swift */; };
+		9FD173D2307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173D1307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel */; };
 		9FD5EDB230741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB330741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB430741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
@@ -117,6 +119,8 @@
 		9FD173C5307EBFF8006571D8 /* cameraCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraCapture.swift; sourceTree = "<group>"; };
 		9FD173C7307EC123006571D8 /*  healthScanTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " healthScanTab.swift"; sourceTree = "<group>"; };
 		9FD173C9307FAAFC006571D8 /* healthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthScreen.swift; sourceTree = "<group>"; };
+		9FD173CF307FD47C006571D8 /* healthAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthAnalysisService.swift; sourceTree = "<group>"; };
+		9FD173D1307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "PetConditionClassifier 1.mlmodel"; sourceTree = "<group>"; };
 		9FD5EDB130741E2D004A9E67 /* root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = root.swift; sourceTree = "<group>"; };
 		9FD5EDB5307424E7004A9E67 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		9FD88C683076D169006AE849 /* pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 		9F9218753072BBBE00A3D0A8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9FD173CC307FD457006571D8 /* Features */,
 				9F06D51C3077B6FB00B191AD /* Data */,
 				9F9E75F23074D89300E39EC9 /* authService.swift */,
 				9F06D52B307811D300B191AD /* bioMetricService.swift */,
@@ -375,6 +380,15 @@
 				9FD173C9307FAAFC006571D8 /* healthScreen.swift */,
 			);
 			path = Health;
+			sourceTree = "<group>";
+		};
+		9FD173CC307FD457006571D8 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9FD173D1307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel */,
+				9FD173CF307FD47C006571D8 /* healthAnalysisService.swift */,
+			);
+			path = Features;
 			sourceTree = "<group>";
 		};
 		9FD88C6C3076D1F2006AE849 /* Pet */ = {
@@ -536,10 +550,12 @@
 				9F06D5213077B77300B191AD /* profileViewModel.swift in Sources */,
 				9F06D52C307811D300B191AD /* bioMetricService.swift in Sources */,
 				9FD173CA307FAAFC006571D8 /* healthScreen.swift in Sources */,
+				9FD173D2307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel in Sources */,
 				9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */,
 				9F9218793072BCD500A3D0A8 /* colors.swift in Sources */,
 				9F06D51B3077B6E800B191AD /* userProfile.swift in Sources */,
 				9FD173C8307EC123006571D8 /*  healthScanTab.swift in Sources */,
+				9FD173D0307FD47C006571D8 /* healthAnalysisService.swift in Sources */,
 				9F06D5263077B81200B191AD /* errorState.swift in Sources */,
 				9FD5EDB6307424E7004A9E67 /* constants.swift in Sources */,
 				9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */,
