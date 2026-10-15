@@ -27,7 +27,7 @@ struct HealthScreen: View {
     @Binding var segment: HealthSegment
     var onSelectTab: (AppTab) -> Void = { _ in }
 
-    @State private var showVetFinderComingSoon = false
+    @State private var showFindVetUI = false
 
     var body: some View {
         ZStack {
@@ -54,11 +54,8 @@ struct HealthScreen: View {
                 .frame(maxWidth: .infinity)
             }
         }
-        .alert("Coming soon", isPresented: $showVetFinderComingSoon) {
-            Button("OK", role: .cancel) {}
-        } message: 
-        {
-            Text("Finding nearby vets isn't available yet.")
+        .sheet(isPresented: $showFindVetUI) {
+            findVetUI()
         }
     }
 
@@ -71,7 +68,7 @@ struct HealthScreen: View {
             Spacer()
 
             Button {
-                showVetFinderComingSoon = true
+                showFindVetUI = true
             } label: {
                 Image(systemName: "mappin.and.ellipse")
                     .font(.system(size: 16, weight: .semibold))
