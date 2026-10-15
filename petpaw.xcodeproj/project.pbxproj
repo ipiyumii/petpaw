@@ -54,6 +54,7 @@
 		9FD173D2307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173D1307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel */; };
 		9FD173D6308015C5006571D8 /* healthObservationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173D5308015C5006571D8 /* healthObservationService.swift */; };
 		9FD173D930801F6E006571D8 /* PetPaw.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173D730801F6E006571D8 /* PetPaw.xcdatamodeld */; };
+		9FD173DB308137C5006571D8 /* findVetUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173DA308137C5006571D8 /* findVetUI.swift */; };
 		9FD5EDB230741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB330741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB430741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
@@ -125,6 +126,7 @@
 		9FD173D1307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "PetConditionClassifier 1.mlmodel"; sourceTree = "<group>"; };
 		9FD173D5308015C5006571D8 /* healthObservationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthObservationService.swift; sourceTree = "<group>"; };
 		9FD173D830801F6E006571D8 /* PetPaw.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PetPaw.xcdatamodel; sourceTree = "<group>"; };
+		9FD173DA308137C5006571D8 /* findVetUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = findVetUI.swift; sourceTree = "<group>"; };
 		9FD5EDB130741E2D004A9E67 /* root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = root.swift; sourceTree = "<group>"; };
 		9FD5EDB5307424E7004A9E67 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		9FD88C683076D169006AE849 /* pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet.swift; sourceTree = "<group>"; };
@@ -274,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				9F9218573072BA2500A3D0A8 /* petpawTests.swift */,
-				9FD173D3308006F7006571D8 /* PetsViewModelTests.swift */,
 			);
 			path = petpawTests;
 			sourceTree = "<group>";
@@ -384,6 +385,7 @@
 				9FD173C5307EBFF8006571D8 /* cameraCapture.swift */,
 				9FD173C7307EC123006571D8 /*  healthScanTab.swift */,
 				9FD173C9307FAAFC006571D8 /* healthScreen.swift */,
+				9FD173DA308137C5006571D8 /* findVetUI.swift */,
 			);
 			path = Health;
 			sourceTree = "<group>";
@@ -574,6 +576,7 @@
 				9FD173C6307EBFF8006571D8 /* cameraCapture.swift in Sources */,
 				9F68D8D7307575BB00228A18 /* quoteFeature.swift in Sources */,
 				9F06D51E3077B70C00B191AD /* userProfileService.swift in Sources */,
+				9FD173DB308137C5006571D8 /* findVetUI.swift in Sources */,
 				9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */,
 				9F68D8D9307575F300228A18 /* onbaording.swift in Sources */,
 				9F68D8D53075757D00228A18 /* welcomeScreen.swift in Sources */,
@@ -601,7 +604,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F9218903073E91100A3D0A8 /* signup.swift in Sources */,
-				9FD173D4308006F7006571D8 /* PetsViewModelTests.swift in Sources */,
 				9FD5EDB330741E2D004A9E67 /* root.swift in Sources */,
 				9F9218583072BA2500A3D0A8 /* petpawTests.swift in Sources */,
 				9F92188C3073E6CE00A3D0A8 /* login.swift in Sources */,
@@ -766,7 +768,9 @@
 				DEVELOPMENT_TEAM = 3D3KVDMTWG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "petpaw uses your camera to take health scan photos";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "petpaw needs you to scan your face to login";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "petpaw uses your location to find nearby ver clinics";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -796,7 +800,9 @@
 				DEVELOPMENT_TEAM = 3D3KVDMTWG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "petpaw uses your camera to take health scan photos";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "petpaw needs you to scan your face to login";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "petpaw uses your location to find nearby ver clinics";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
