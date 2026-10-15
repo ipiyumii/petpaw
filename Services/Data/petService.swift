@@ -7,12 +7,15 @@
 
 import FirebaseFirestore
 import UIKit
+import CoreData
 
 protocol PetServiceProtocol {
     func fetchPets(ownerId: String) async throws -> [Pet]
     func createPet(_ pet: Pet) async throws
     func updatePet(_ pet: Pet) async throws
     func uploadPhoto(_ image: UIImage, petId: String) async throws -> String
+    func saveLocally(_pets: [Pet])
+    func fetchLocalPets(pwnerId: String)-> [Pet]
 }
 
 class PetService: PetServiceProtocol {
@@ -135,6 +138,88 @@ class PetService: PetServiceProtocol {
 
         return pet
     }
+
+
+    func saveLocally(_pets pets: [Pet]) 
+    {
+        let context = NSManagedObjectContext.current
+
+        for pet in pets 
+        {
+            let request = NSFetchRequest<NSManagedObject>(entityName: "PetEntity")
+            request.predicate = NSPredicate(format: "id == %@", pet.id)
+
+            var entity: NSManagedObject
+
+            if let savedPet = try? context.fetch(request).first 
+            {
+                entity = savedPet
+            } else {
+                entity = NSEntityDescription.insertNewObject(
+                    forEntityName: "PetEntity",
+                    into: context
+                )
+            }
+
+            entity.setValue(pet.id, forKey: "id")
+            entity.setValue(pet.ownerId, forKey: "ownerId")
+            entity.setValue(pet.name, forKey: "name")
+            entity.setValue(pet.species, forKey: "species")
+            entity.setValue(pet.breed, forKey: "breed")
+            entity.setValue(pet.dateOfBirth, forKey: "dateOfBirth")
+            entity.setValue(pet.sex.rawValue, forKey: "sex")
+            entity.setValue(pet.weightKg, forKey: "weightKg")
+            entity.setValue(pet.photoURL, forKey: "photoURL")
+        }
+
+        do {
+            try context.save()
+        } catch {
+            print("Error saving pets: \(error)")
+        }
+    }
+
+        func fetchLocalPets(pwnerId ownerId: String) -> [Pet]
+        {
+            let context = NSManagedObjectContext.current
+
+            let request = NSFetchRequest<NSManagedObject>(entityName: "PetEntity")
+            request.predicate = NSPredicate(format: "ownerId == %@", ownerId)
+
+            guard let entities = try? context.fetch(request) else 
+            {
+                return []
+            }
+
+        var pets: [Pet] = []
+
+        for entity in entities
+        {
+            guard let id = entity.value(forKey: "id") as? String,
+                let name = entity.value(forKey: "name") as? String,
+                let species = entity.value(forKey: "species") as? String,
+                let sex = entity.value(forKey: "sex") as? String else {
+                continue
+            }
+
+            let pet = Pet(
+                id: id,
+                ownerId: ownerId,
+                name: name,
+                species: species,
+                breed: entity.value(forKey: "breed") as? String,
+                dateOfBirth: entity.value(forKey: "dateOfBirth") as? Date,
+                sex: PetSex(rawValue: sex) ?? .unknown,
+                weightKg: entity.value(forKey: "weightKg") as? Double ?? 0,
+                photoURL: entity.value(forKey: "photoURL") as? String
+            )
+
+            pets.append(pet)
+        }
+
+        return pets
+}
+
 }
 
 private extension UIImage {
