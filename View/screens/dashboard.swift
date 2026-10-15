@@ -9,10 +9,14 @@ import SwiftUI
 
 struct dashboard: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var showProfile = false
     @EnvironmentObject var petsViewModel: PetsViewModel
-    @StateObject private var profileViewModel = ProfileViewModel()
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
+    @State private var showProfile = false
+    @StateObject private var profileViewModel = ProfileViewModel()
+    @State private var latestObservation: HealthObservation?
+    @State private var latestMedicationLog: String?
+
     var onSelectTab: (AppTab) -> Void = { _ in }
     var onScanHealth: () -> Void={}
     var onAddRecord:() -> Void={}
@@ -24,9 +28,10 @@ struct dashboard: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: Spacing.lg) {
                     header
+                    medicationBanner
                     petCard
                     quickActions
-                    scheduleCard
+                    recentActivityCard
 
                 }
                 .padding(.horizontal, Spacing.lg)
@@ -41,6 +46,7 @@ struct dashboard: View {
         }
         .task {
              await loadProfile()
+             loadRecentActivity()
          }
     }
 
@@ -131,9 +137,29 @@ struct dashboard: View {
                             .font(PetPawTypography.bodySmall)
                             .foregroundColor(PetPawColors.textSecondary)
 
-                        Text("View profile")
-                            .font(PetPawTypography.caption.weight(.semibold))
-                            .foregroundColor(PetPawColors.primary)
+                        if let observation = latestObservation 
+                        {
+                            let isConcern = observation.condition.lowercased().contains("concern")
+
+                            HStack(spacing: Spacing.xs) {
+                                Text(isConcern ? "Mild concern" : "Healthy")
+                                    .font(PetPawTypography.caption.weight(.semibold))
+                                    .foregroundColor(isConcern ? PetPawColors.warning : PetPawColors.success)
+                                    .padding(.horizontal, Spacing.sm)
+                                    .padding(.vertical, 2)
+                                    .background((isConcern ? PetPawColors.warning : PetPawColors.success).opacity(0.12))
+                                    .clipShape(Capsule())
+
+                                Text("Last check: \(relativeDate(observation.createdAt))")
+                                    .font(PetPawTypography.caption)
+                                    .foregroundColor(PetPawColors.textTertiary)
+                            }
+                        } else {
+                            Text("View profile")
+                                .font(PetPawTypography.caption.weight(.semibold))
+                                .foregroundColor(PetPawColors.primary)
+                        }
+
                     }
 
                     Spacer()
@@ -172,6 +198,50 @@ struct dashboard: View {
                 )
             }
             .buttonStyle(.plain)
+        }
+    }
+
+    @ViewBuilder
+    private var medicationBanner: some View {
+        if let pet = petsViewModel.selectedPet 
+        {
+            if let latestMedicationLog = latestMedicationLog 
+            {
+                HStack(spacing: Spacing.sm) {
+                    Image(systemName: "pills.fill").foregroundColor(PetPawColors.warningDark)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("LAST MEDICINE LOGGED")
+                            .font(PetPawTypography.caption.weight(.bold))
+                            .foregroundColor(PetPawColors.warningDark)
+
+                        Text(latestMedicationLog)
+                            .font(PetPawTypography.bodySmall)
+                            .foregroundColor(PetPawColors.textPrimary)
+                    }
+
+                    Spacer()
+                }
+                .padding(Spacing.md)
+                .background(RoundedRectangle(cornerRadius: 18).fill(PetPawColors.warning.opacity(0.18)))
+            } else {
+                Button {
+                    onSelectTab(.reminders)
+                } label: {
+                    HStack {
+                        Image(systemName: "mic.fill").foregroundColor(PetPawColors.primary)
+
+                        Text("Try: \"Hey Siri, log medicine for \(pet.name) in PetPaw\"")
+                            .font(PetPawTypography.caption)
+                            .foregroundColor(PetPawColors.textPrimary)
+
+                        Spacer()
+                    }
+                    .padding(Spacing.md)
+                    .background(RoundedRectangle(cornerRadius: 18).fill(PetPawColors.primary.opacity(0.1)))
+                }
+                .buttonStyle(.plain)
+            }
         }
     }
 
@@ -249,52 +319,105 @@ struct dashboard: View {
         return Array(repeating: GridItem(.flexible(), spacing: Spacing.sm), count: count)
     }
 
-    private var scheduleCard: some View {
+    private var recentActivityCard: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
-            Text("Today's schedule")
+            Text("Recent Activity")
                 .font(PetPawTypography.h3)
                 .foregroundColor(PetPawColors.textPrimary)
 
-            Button(action: { onSelectTab(.reminders) }) {
-                HStack(spacing: Spacing.md) {
-                    ZStack {
-                        Circle()
-                            .fill(PetPawColors.warning.opacity(0.15))
-                            .frame(width: 48, height: 48)
-                        Image(systemName: "calendar.badge.clock")
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(PetPawColors.warning)
-                    }
-
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Feeding, medication & vet reminders")
-                            .font(PetPawTypography.body.weight(.semibold))
-                            .foregroundColor(PetPawColors.textPrimary)
-                        Text("Coming soon")
-                            .font(PetPawTypography.caption)
-                            .foregroundColor(PetPawColors.textTertiary)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(PetPawColors.textTertiary.opacity(0.6))
+            if latestObservation == nil && latestMedicationLog == nil {
+                Button(action: onScanHealth) {
+                    activityRow(
+                        icon: "calendar.badge.clock",
+                        iconColor: PetPawColors.warning,
+                        title: "No activity yet",
+                        subtitle: "Scan your pet's health or log medicine with Siri"
+                    )
                 }
-                .padding(Spacing.md)
-                .background(
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .fill(Color.white)
-                )
-                .shadow(color: PetPawColors.shadowLight, radius: 10, x: 0, y: 5)
+                .buttonStyle(.plain)
+            } else {
+                if let observation = latestObservation {
+                    let isConcern = observation.condition.lowercased().contains("concern")
+
+                    Button(action: onScanHealth) {
+                        activityRow(
+                            icon: observation.area == "Eyes" ? "eye.fill" : "viewfinder",
+                            iconColor: isConcern ? PetPawColors.warning : PetPawColors.success,
+                            title: "Health scan · \(observation.area)",
+                            subtitle: "\(isConcern ? "Mild concern" : "Looked normal") · \(relativeDate(observation.createdAt))"
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+
+                if let medication = latestMedicationLog {
+                    Button(action: {
+                        onSelectTab(.reminders)
+                    }) {
+                        activityRow(
+                            icon: "pills.fill",
+                            iconColor: PetPawColors.attention,
+                            title: "Medicine logged",
+                            subtitle: medication
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
             }
-.buttonStyle(.plain)
         }
+    }
+
+    private func activityRow(icon: String, iconColor: Color, title: String, subtitle: String ) -> some View {
+        HStack(spacing: Spacing.md) {
+            ZStack {
+                Circle()
+                    .fill(iconColor.opacity(0.15))
+                    .frame(width: 48, height: 48)
+
+                Image(systemName: icon)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(iconColor)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(PetPawTypography.body.weight(.semibold))
+                    .foregroundColor(PetPawColors.textPrimary)
+
+                Text(subtitle)
+                    .font(PetPawTypography.caption)
+                    .foregroundColor(PetPawColors.textTertiary)
+            }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(PetPawColors.textTertiary.opacity(0.6))
+        }
+        .padding(Spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .fill(Color.white)
+        )
+        .shadow(color: PetPawColors.shadowLight, radius: 10, x: 0, y: 5)
     }
 
     private func loadProfile() async {
         guard let uid = authViewModel.authService.currentUser?.uid else { return }
         await profileViewModel.loadProfile(uid: uid)
+    }
+
+    private func relativeDate(_ date: Date) -> String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .abbreviated
+        return formatter.localizedString(for: date, relativeTo: Date())
+    }
+
+    private func loadRecentActivity() {
+        guard let pet = petsViewModel.selectedPet else { return }
+        latestObservation = HealthObservationService().fetchObservations(petId: pet.id).first
+        latestMedicationLog = MedicationLogStore.fetchAll().first(where: { $0.hasPrefix(pet.name) })
     }
 }
 
