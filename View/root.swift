@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     @StateObject private var authViewModel = AuthViewModel()
+    @StateObject private var petsViewModel = PetsViewModel()
 
     var body: some View {
         if !authViewModel.isAuthenticated {
@@ -17,11 +18,13 @@ struct RootView: View {
         } else if !authViewModel.hasCompletedOnboarding {
             OnboardingView()
                 .environmentObject(authViewModel)
+                .environmentObject(petsViewModel)
         } else if !authViewModel.isUlocked {
             LockScreen(onUnlock: {authViewModel.isUlocked = true})
         }else {
              MainTabView()
                 .environmentObject(authViewModel)
+                .environmentObject(petsViewModel)
         }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct MainTabView: View {
     @EnvironmentObject var AuthViewModel: AuthViewModel
     @State private var selectedTab: AppTab = .home
-    @StateObject private var petViewModel = PetsViewModel()
+    @EnvironmentObject var petViewModel: PetsViewModel
     @State private var showPetSwitcher = false
     @State private var showAddPet = false
     @State private var healthSegment: HealthSegment = .overview
@@ -45,7 +45,6 @@ struct MainTabView: View {
             }
 
         }
-        .environmentObject(petViewModel)
         .sheet(isPresented: $showAddPet) {
             NavigationStack {
                PetProfile(pet: blankPet, isNewPet: true)
@@ -124,5 +123,7 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView().environmentObject(AuthViewModel())
+    MainTabView()
+        .environmentObject(AuthViewModel())
+        .environmentObject(PetsViewModel())
 }

@@ -24,20 +24,6 @@ struct petpawApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: constants.CoreData.modelName)
-
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                print("Core Data loading error: \(error), \(error.userInfo)")
-            }
-        }
-
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
-        return container
-    }()
-
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
@@ -66,10 +52,25 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         return true
     }
+}
 
-    // MARK: - Save Core Data
-    func saveContext() {
-        let context = persistentContainer.viewContext
+enum CoreDataManager {
+    static let container: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: constants.CoreData.modelName)
+
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                print("Core Data loading error: \(error), \(error.userInfo)")
+            }
+        }
+
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        return container
+    }()
+
+    static func saveContext() {
+        let context = container.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -83,7 +84,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 extension NSManagedObjectContext {
     static var current: NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
+        CoreDataManager.container.viewContext
     }
 }
