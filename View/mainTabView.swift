@@ -64,7 +64,7 @@ struct MainTabView: View {
             case .health:
                 HealthScreen(segment: $healthSegment, onSelectTab: navigate)
             case .reminders:
-                todoScreen(tab: .reminders)
+                Reminder()
             case .pets:
             PetProfile(
                 pet: petViewModel.selectedPet ?? blankPet,isNewPet: petViewModel.selectedPet == nil)
