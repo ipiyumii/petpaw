@@ -56,6 +56,10 @@
 		9FD173D930801F6E006571D8 /* PetPaw.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173D730801F6E006571D8 /* PetPaw.xcdatamodeld */; };
 		9FD173DB308137C5006571D8 /* findVetUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173DA308137C5006571D8 /* findVetUI.swift */; };
 		9FD173E3308261D5006571D8 /* siriKitMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173E2308261D5006571D8 /* siriKitMedicine.swift */; };
+		9FD173E730826DC1006571D8 /* reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173E630826DC1006571D8 /* reminder.swift */; };
+		9FD173E9308289F9006571D8 /* reminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173E8308289F9006571D8 /* reminderService.swift */; };
+		9FD173EC30828A53006571D8 /* addReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173EB30828A53006571D8 /* addReminder.swift */; };
+		9FD173F93082ACFB006571D8 /* reminderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173F83082ACFB006571D8 /* reminderTest.swift */; };
 		9FD5EDB230741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB330741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB430741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
@@ -129,6 +133,10 @@
 		9FD173D830801F6E006571D8 /* PetPaw.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PetPaw.xcdatamodel; sourceTree = "<group>"; };
 		9FD173DA308137C5006571D8 /* findVetUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = findVetUI.swift; sourceTree = "<group>"; };
 		9FD173E2308261D5006571D8 /* siriKitMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = siriKitMedicine.swift; sourceTree = "<group>"; };
+		9FD173E630826DC1006571D8 /* reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminder.swift; sourceTree = "<group>"; };
+		9FD173E8308289F9006571D8 /* reminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderService.swift; sourceTree = "<group>"; };
+		9FD173EB30828A53006571D8 /* addReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addReminder.swift; sourceTree = "<group>"; };
+		9FD173F83082ACFB006571D8 /* reminderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderTest.swift; sourceTree = "<group>"; };
 		9FD5EDB130741E2D004A9E67 /* root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = root.swift; sourceTree = "<group>"; };
 		9FD5EDB5307424E7004A9E67 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		9FD88C683076D169006AE849 /* pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet.swift; sourceTree = "<group>"; };
@@ -278,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				9F9218573072BA2500A3D0A8 /* petpawTests.swift */,
+				9FD173F83082ACFB006571D8 /* reminderTest.swift */,
 			);
 			path = petpawTests;
 			sourceTree = "<group>";
@@ -362,6 +371,7 @@
 		9F9218823073E4F100A3D0A8 /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				9FD173EA30828A3E006571D8 /* Reminder */,
 				9FD173C4307EBFCA006571D8 /* Health */,
 				9FD88C6F3076D245006AE849 /* Pets */,
 				9F68D8EB3076C95800228A18 /* Features */,
@@ -399,8 +409,18 @@
 				9FD173CF307FD47C006571D8 /* healthAnalysisService.swift */,
 				9FD173D5308015C5006571D8 /* healthObservationService.swift */,
 				9FD173E2308261D5006571D8 /* siriKitMedicine.swift */,
+				9FD173E8308289F9006571D8 /* reminderService.swift */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		9FD173EA30828A3E006571D8 /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				9FD173E630826DC1006571D8 /* reminder.swift */,
+				9FD173EB30828A53006571D8 /* addReminder.swift */,
+			);
+			path = Reminder;
 			sourceTree = "<group>";
 		};
 		9FD88C6C3076D1F2006AE849 /* Pet */ = {
@@ -565,7 +585,9 @@
 				9FD173D930801F6E006571D8 /* PetPaw.xcdatamodeld in Sources */,
 				9FD173E3308261D5006571D8 /* siriKitMedicine.swift in Sources */,
 				9FD173D2307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel in Sources */,
+				9FD173E9308289F9006571D8 /* reminderService.swift in Sources */,
 				9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */,
+				9FD173EC30828A53006571D8 /* addReminder.swift in Sources */,
 				9F9218793072BCD500A3D0A8 /* colors.swift in Sources */,
 				9F06D51B3077B6E800B191AD /* userProfile.swift in Sources */,
 				9FD173C8307EC123006571D8 /*  healthScanTab.swift in Sources */,
@@ -588,6 +610,7 @@
 				9F9E75F33074D89300E39EC9 /* authService.swift in Sources */,
 				9F9E75F530752D1300E39EC9 /* authViewModel.swift in Sources */,
 				9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */,
+				9FD173E730826DC1006571D8 /* reminder.swift in Sources */,
 				9F965730307D59E8001AE28A /* petsViewModel.swift in Sources */,
 				9F965734307D6D67001AE28A /* petSwitcherView.swift in Sources */,
 				9FD173D6308015C5006571D8 /* healthObservationService.swift in Sources */,
@@ -609,6 +632,7 @@
 			files = (
 				9F9218903073E91100A3D0A8 /* signup.swift in Sources */,
 				9FD5EDB330741E2D004A9E67 /* root.swift in Sources */,
+				9FD173F93082ACFB006571D8 /* reminderTest.swift in Sources */,
 				9F9218583072BA2500A3D0A8 /* petpawTests.swift in Sources */,
 				9F92188C3073E6CE00A3D0A8 /* login.swift in Sources */,
 			);
