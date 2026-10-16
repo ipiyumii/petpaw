@@ -8,22 +8,6 @@
 import AppIntents
 import Foundation
 
-struct MedicationLogStore {
-    
-    static func add(petName: String) {
-        var logs = fetchAll()
-        
-        let log = "\(petName) — \(Date().formatted(date: .abbreviated, time: .shortened))"
-        logs.insert(log, at: 0)
-        
-        UserDefaults.standard.set(logs, forKey: "medicationLogs")
-    }
-    
-    static func fetchAll() -> [String] {
-        return UserDefaults.standard.stringArray(forKey: "medicationLogs") ?? []
-    }
-}
-
 struct LogMedicationIntent: AppIntent {
     static var title: LocalizedStringResource = "Log Medicine"
     static var description = IntentDescription("Logs when a pet's medicine is given.")
@@ -31,7 +15,19 @@ struct LogMedicationIntent: AppIntent {
     var petName: String
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        MedicationLogStore.add(petName: petName)
+        let service = ReminderService()
+        let petId = service.findPetId(named: petName) ?? petName
+
+        service.save(Reminder(
+            id: UUID().uuidString,
+            petId: petId,
+            type: "meds",
+            title: "Medicine",
+            date: Date(),
+            repeatOption: "None",
+            notes: "Logged via Siri",
+            isCompleted: true
+        ))
         
         return .result(dialog: "Logged medicine for \(petName).")
     }

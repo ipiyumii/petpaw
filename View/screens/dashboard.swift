@@ -15,7 +15,7 @@ struct dashboard: View {
 
     @State private var showProfile = false
     @State private var latestObservation: HealthObservation?
-    @State private var latestMedicationLog: String?
+    @State private var latestMedReminder: Reminder?
 
     var onSelectTab: (AppTab) -> Void = { _ in }
     var onScanHealth: () -> Void={}
@@ -216,7 +216,7 @@ struct dashboard: View {
     @ViewBuilder
     private var medicationBanner: some View {
         if let pet = petsViewModel.selectedPet {
-            if let latestMedicationLog = latestMedicationLog {
+            if let latestMedReminder = latestMedReminder {
                 HStack(spacing: Spacing.sm) {
                     ZStack {
                         Circle()
@@ -232,7 +232,7 @@ struct dashboard: View {
                             .font(PetPawTypography.caption.weight(.bold))
                             .foregroundColor(PetPawColors.warningDark)
 
-                        Text(latestMedicationLog)
+                        Text(latestMedReminder.title)
                             .font(PetPawTypography.bodySmall.weight(.semibold))
                             .foregroundColor(PetPawColors.textPrimary)
                     }
@@ -331,7 +331,7 @@ struct dashboard: View {
         return Array(repeating: GridItem(.flexible(), spacing: Spacing.sm), count: 4)
     }
 
-    private var todaysScheduleCard: some View {
+private var todaysScheduleCard: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             HStack {
                 Text("Today's schedule")
@@ -345,15 +345,14 @@ struct dashboard: View {
                 }
             }
 
-            if let latestMedicationLog 
-            {
+            if let latestMedReminder {
                 Button(action: { onSelectTab(.reminders) }) {
                     activityRow(
                         icon: "pills.fill",
                         iconColor: PetPawColors.attention,
-                        title: "Medicine logged",
-                        subtitle: latestMedicationLog,
-                        status: dashboard.ActivityStatus.done
+                        title: latestMedReminder.title,
+                        subtitle: "\(latestMedReminder.isCompleted ? "Given" : "Due") · \(relativeDate(latestMedReminder.date))",
+                        status: latestMedReminder.isCompleted ? dashboard.ActivityStatus.done : dashboard.ActivityStatus.alert
                     )
                 }
                 .buttonStyle(PressableStyle())
@@ -387,7 +386,7 @@ struct dashboard: View {
                 }
             }
 
-            if latestObservation == nil && latestMedicationLog == nil {
+            if latestObservation == nil && latestMedReminder == nil {
                 Button(action: onScanHealth) {
                     activityRow(
                         icon: "calendar.badge.clock",
@@ -413,20 +412,20 @@ struct dashboard: View {
                     .buttonStyle(PressableStyle())
                 }
 
-                if let medication = latestMedicationLog {
-                    Button(action: {
-                        onSelectTab(.reminders)
-                    }) {
-                        activityRow(
-                            icon: "pills.fill",
-                            iconColor: PetPawColors.attention,
-                            title: "Medicine logged",
-                            subtitle: medication,
-                            status: dashboard.ActivityStatus.done
-                        )
-                    }
-                    .buttonStyle(PressableStyle())
-                }
+                if let medication = latestMedReminder {
+    Button(action: {
+        onSelectTab(.reminders)
+    }) {
+        activityRow(
+            icon: "pills.fill",
+            iconColor: PetPawColors.attention,
+            title: medication.title,
+            subtitle: "\(medication.isCompleted ? "Given" : "Due") · \(relativeDate(medication.date))",
+            status: medication.isCompleted ? dashboard.ActivityStatus.done : dashboard.ActivityStatus.alert
+        )
+    }
+    .buttonStyle(PressableStyle())
+}
             }
         }
     }
@@ -496,7 +495,7 @@ struct dashboard: View {
     private func loadRecentActivity() {
         guard let pet = petsViewModel.selectedPet else { return }
         latestObservation = HealthObservationService().fetchObservations(petId: pet.id).first
-        latestMedicationLog = MedicationLogStore.fetchAll().first(where: { $0.hasPrefix(pet.name) })
+        latestMedReminder = ReminderService().fetchAll(petId: pet.id).first(where: { $0.type == "meds" })
     }
 }
 
