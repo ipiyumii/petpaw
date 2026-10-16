@@ -59,6 +59,7 @@
 		9FD173E730826DC1006571D8 /* reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173E630826DC1006571D8 /* reminder.swift */; };
 		9FD173E9308289F9006571D8 /* reminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173E8308289F9006571D8 /* reminderService.swift */; };
 		9FD173EC30828A53006571D8 /* addReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173EB30828A53006571D8 /* addReminder.swift */; };
+		9FD173F93082ACFB006571D8 /* reminderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173F83082ACFB006571D8 /* reminderTest.swift */; };
 		9FD5EDB230741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB330741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB430741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
@@ -135,6 +136,7 @@
 		9FD173E630826DC1006571D8 /* reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminder.swift; sourceTree = "<group>"; };
 		9FD173E8308289F9006571D8 /* reminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderService.swift; sourceTree = "<group>"; };
 		9FD173EB30828A53006571D8 /* addReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addReminder.swift; sourceTree = "<group>"; };
+		9FD173F83082ACFB006571D8 /* reminderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderTest.swift; sourceTree = "<group>"; };
 		9FD5EDB130741E2D004A9E67 /* root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = root.swift; sourceTree = "<group>"; };
 		9FD5EDB5307424E7004A9E67 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		9FD88C683076D169006AE849 /* pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				9F9218573072BA2500A3D0A8 /* petpawTests.swift */,
+				9FD173F83082ACFB006571D8 /* reminderTest.swift */,
 			);
 			path = petpawTests;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 			files = (
 				9F9218903073E91100A3D0A8 /* signup.swift in Sources */,
 				9FD5EDB330741E2D004A9E67 /* root.swift in Sources */,
+				9FD173F93082ACFB006571D8 /* reminderTest.swift in Sources */,
 				9F9218583072BA2500A3D0A8 /* petpawTests.swift in Sources */,
 				9F92188C3073E6CE00A3D0A8 /* login.swift in Sources */,
 			);
