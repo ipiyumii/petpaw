@@ -21,7 +21,6 @@ struct UserProfileScreen: View {
 
     @State private var selectedPhoto: UIImage?
     @State private var showPhotoPicker = false
-    @State private var showSignOutConfirmation = false
     @State private var editingField: ProfileField?
     @State private var heroScale: CGFloat = 0.85
     @State private var heroOpacity: Double = 0
@@ -58,19 +57,8 @@ struct UserProfileScreen: View {
         .task {
             await loadProfile()
         }
-        .confirmationDialog(
-            "Are you sure you want to sign out?",
-            isPresented: $showSignOutConfirmation,
-            titleVisibility: .visible
-        ) {
-            Button("Sign Out", role: .destructive) {
-                authViewModel.signOut()
-            }
-
-            Button("Cancel", role: .cancel) {
-            }
         }
-    }
+    
 
     private var background: some View {
         LinearGradient(
@@ -264,50 +252,25 @@ struct UserProfileScreen: View {
     }
 
     private var actionButtons: some View {
-        VStack(spacing: Spacing.sm) {
-            Button(action: handleSave) {
-                HStack {
-                    if viewModel.isSaving {
-                        ProgressView().tint(.white)
-                    } else {
-                        Image(systemName: "checkmark.circle.fill")
-                        Text("Save Changes")
-                            .font(PetPawTypography.button)
-                    }
+        Button(action: handleSave) 
+        {
+            HStack {
+                if viewModel.isSaving {
+                    ProgressView().tint(.white)
+                } else {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text("Save Changes").font(PetPawTypography.button)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 54)
-                .foregroundColor(.white)
-                .background(
-                    LinearGradient(
-                        gradient: Gradient(colors: [PetPawColors.primary, PetPawColors.successDark]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .opacity(viewModel.hasUnsavedChanges ? 1.0 : 0.5)
-                .shadow(
-                    color: viewModel.hasUnsavedChanges ? PetPawColors.primary.opacity(0.3) : .clear,
-                    radius: 10, x: 0, y: 5
-                )
             }
-            .disabled(!viewModel.hasUnsavedChanges || viewModel.isSaving)
-            .accessibilityHint("Double-tap to save your changes")
-
-            Button(role: .destructive) {
-                showSignOutConfirmation = true
-            } label: {
-                HStack(spacing: Spacing.xs) {
-                    Image(systemName: "arrow.right.square")
-                    Text("Sign Out")
-                }
-                .font(PetPawTypography.button)
-                .foregroundColor(PetPawColors.danger)
-                .padding(.vertical, Spacing.sm)
-            }
-            .accessibilityHint("Double-tap to sign out of your account")
+            .frame(maxWidth: .infinity)
+            .frame(height: 54)
+            .foregroundColor(.white)
+            .background(PetPawColors.primary)
+            .cornerRadius(18)
+            .opacity(viewModel.hasUnsavedChanges ? 1 : 0.5)
         }
+        .disabled(!viewModel.hasUnsavedChanges || viewModel.isSaving)
+    
         .padding(.top, Spacing.sm)
     }
 
@@ -346,6 +309,7 @@ struct UserProfileScreen: View {
         await viewModel.loadProfile(uid: uid)
     }
 }
+
 
 private struct ProfileAvatarView: View {
     let selectedPhoto: UIImage?

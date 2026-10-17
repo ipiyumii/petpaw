@@ -22,5 +22,9 @@ struct constants{
         static let usersCollection = "users"
         static let petsCollection = "pets"
     }
+
+    struct UserData {
+        static let notificationsEnabled = "notificationsEnabled"
+    }
 }
 
