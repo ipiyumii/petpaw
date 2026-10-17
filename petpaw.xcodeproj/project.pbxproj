@@ -15,6 +15,8 @@
 		9F06D5283077C4D000B191AD /* userProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5273077C4D000B191AD /* userProfileScreen.swift */; };
 		9F06D52C307811D300B191AD /* bioMetricService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D52B307811D300B191AD /* bioMetricService.swift */; };
 		9F0D24C63074325A00BCD900 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */; };
+		9F524A973083FC30005D5830 /* healthTimelineUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F524A963083FC30005D5830 /* healthTimelineUI.swift */; };
+		9F524A993083FCB1005D5830 /* healthTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F524A983083FCB1005D5830 /* healthTimelineService.swift */; };
 		9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8CD3075580C00228A18 /* firebaseConfig.swift */; };
 		9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D0307574DD00228A18 /* addPetScreen.swift */; };
 		9F68D8D33075753500228A18 /* selectImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D23075753500228A18 /* selectImage.swift */; };
@@ -96,6 +98,8 @@
 		9F06D5273077C4D000B191AD /* userProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfileScreen.swift; sourceTree = "<group>"; };
 		9F06D52B307811D300B191AD /* bioMetricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bioMetricService.swift; sourceTree = "<group>"; };
 		9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9F524A963083FC30005D5830 /* healthTimelineUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthTimelineUI.swift; sourceTree = "<group>"; };
+		9F524A983083FCB1005D5830 /* healthTimelineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthTimelineService.swift; sourceTree = "<group>"; };
 		9F68D8CD3075580C00228A18 /* firebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseConfig.swift; sourceTree = "<group>"; };
 		9F68D8D0307574DD00228A18 /* addPetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPetScreen.swift; sourceTree = "<group>"; };
 		9F68D8D23075753500228A18 /* selectImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectImage.swift; sourceTree = "<group>"; };
@@ -401,6 +405,7 @@
 				9FD173C7307EC123006571D8 /*  healthScanTab.swift */,
 				9FD173C9307FAAFC006571D8 /* healthScreen.swift */,
 				9FD173DA308137C5006571D8 /* findVetUI.swift */,
+				9F524A963083FC30005D5830 /* healthTimelineUI.swift */,
 			);
 			path = Health;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				9FD173D5308015C5006571D8 /* healthObservationService.swift */,
 				9FD173E2308261D5006571D8 /* siriKitMedicine.swift */,
 				9FD173E8308289F9006571D8 /* reminderService.swift */,
+				9F524A983083FCB1005D5830 /* healthTimelineService.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -601,12 +607,14 @@
 				9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */,
 				9FD173FB3082B206006571D8 /* settings.swift in Sources */,
 				9F68D8ED3076C96D00228A18 /* todoScreen.swift in Sources */,
+				9F524A993083FCB1005D5830 /* healthTimelineService.swift in Sources */,
 				9F92188F3073E91100A3D0A8 /* signup.swift in Sources */,
 				9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */,
 				9FD173C6307EBFF8006571D8 /* cameraCapture.swift in Sources */,
 				9F68D8D7307575BB00228A18 /* quoteFeature.swift in Sources */,
 				9F06D51E3077B70C00B191AD /* userProfileService.swift in Sources */,
 				9FD173DB308137C5006571D8 /* findVetUI.swift in Sources */,
+				9F524A973083FC30005D5830 /* healthTimelineUI.swift in Sources */,
 				9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */,
 				9F68D8D9307575F300228A18 /* onbaording.swift in Sources */,
 				9F68D8D53075757D00228A18 /* welcomeScreen.swift in Sources */,
