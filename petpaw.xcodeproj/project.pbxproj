@@ -60,6 +60,7 @@
 		9FD173E9308289F9006571D8 /* reminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173E8308289F9006571D8 /* reminderService.swift */; };
 		9FD173EC30828A53006571D8 /* addReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173EB30828A53006571D8 /* addReminder.swift */; };
 		9FD173F93082ACFB006571D8 /* reminderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173F83082ACFB006571D8 /* reminderTest.swift */; };
+		9FD173FB3082B206006571D8 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173FA3082B206006571D8 /* settings.swift */; };
 		9FD5EDB230741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB330741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
 		9FD5EDB430741E2D004A9E67 /* root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB130741E2D004A9E67 /* root.swift */; };
@@ -137,6 +138,7 @@
 		9FD173E8308289F9006571D8 /* reminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderService.swift; sourceTree = "<group>"; };
 		9FD173EB30828A53006571D8 /* addReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addReminder.swift; sourceTree = "<group>"; };
 		9FD173F83082ACFB006571D8 /* reminderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderTest.swift; sourceTree = "<group>"; };
+		9FD173FA3082B206006571D8 /* settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
 		9FD5EDB130741E2D004A9E67 /* root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = root.swift; sourceTree = "<group>"; };
 		9FD5EDB5307424E7004A9E67 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		9FD88C683076D169006AE849 /* pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			children = (
 				9F68D8EC3076C96C00228A18 /* todoScreen.swift */,
 				9F06D5273077C4D000B191AD /* userProfileScreen.swift */,
+				9FD173FA3082B206006571D8 /* settings.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				9FD5EDB6307424E7004A9E67 /* constants.swift in Sources */,
 				9F92187B3072BDB700A3D0A8 /* typography.swift in Sources */,
 				9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */,
+				9FD173FB3082B206006571D8 /* settings.swift in Sources */,
 				9F68D8ED3076C96D00228A18 /* todoScreen.swift in Sources */,
 				9F92188F3073E91100A3D0A8 /* signup.swift in Sources */,
 				9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */,

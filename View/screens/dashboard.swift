@@ -13,9 +13,10 @@ struct dashboard: View {
     @StateObject private var profileViewModel = ProfileViewModel()
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    @State private var showProfile = false
+    // @State private var showProfile = false
     @State private var latestObservation: HealthObservation?
     @State private var latestMedReminder: Reminder?
+    @State private var showSettings = false
 
     var onSelectTab: (AppTab) -> Void = { _ in }
     var onScanHealth: () -> Void={}
@@ -42,8 +43,8 @@ struct dashboard: View {
             }
         }
 
-        .sheet(isPresented: $showProfile) {
-            UserProfileScreen()
+        .sheet(isPresented: $showSettings) {
+            Settings()
         }
         .task {
              await loadProfile()
@@ -64,7 +65,7 @@ struct dashboard: View {
      private var header: some View {
         HStack(spacing: Spacing.md) {
             Button(action: {
-                showProfile = true
+                showSettings = true
             }) {
                 ZStack{
                     Circle()
