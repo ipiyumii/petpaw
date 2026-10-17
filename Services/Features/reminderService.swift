@@ -7,6 +7,7 @@
 
 import CoreData
 import Foundation
+import UserNotifications
 
 struct Reminder: Identifiable {
     let id: String
@@ -38,6 +39,8 @@ final class ReminderService {
         entity.setValue(Date(), forKey: "createdAt")
 
         try? context.save()
+
+        scheduleNotification(for: reminder)
     }
 
     func fetchAll(petId: String) -> [Reminder] {
@@ -76,5 +79,42 @@ final class ReminderService {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "PetEntity")
         fetchRequest.predicate = NSPredicate(format: "name ==[c] %@", name)
         return (try? context.fetch(fetchRequest))?.first?.value(forKey: "id") as? String
+    }
+
+        private func scheduleNotification(for reminder: Reminder){
+        let center = UNUserNotificationCenter.current()
+
+        center.removePendingNotificationRequests(withIdentifiers: [reminder.id])
+
+        if UserDefaults.standard.bool(forKey: constants.UserData.notificationsEnabled) == false
+        {
+            return
+        }
+
+        if reminder.isCompleted 
+        {
+            return
+        }
+
+        if reminder.date <= Date() 
+        {
+            return
+        }
+
+        let content = UNMutableNotificationContent()
+        content.title = reminder.title
+        content.body = "your pet's \(reminder.type) reminder.Do not forget!"
+        content.sound = UNNotificationSound.default
+
+        let date = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],from: reminder.date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date,repeats: false)
+        let request = UNNotificationRequest(identifier: reminder.id,content: content,trigger: trigger)
+
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted 
+            {
+                center.add(request)
+            }
+        }
     }
 }

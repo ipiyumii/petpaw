@@ -121,9 +121,21 @@ struct Settings: View {
                                             UNUserNotificationCenter.current()
                                                 .requestAuthorization(
                                                     options: [.alert, .sound, .badge]
-                                                ) { _, _ in }
+                                                ) 
+                                        } else {
+                                            UNUserNotificationCenter.current()
+                                                .getPendingNotificationRequests { 
+                                                    requests in
+                                                    let ids = requests.map { 
+                                                        request in
+                                                        request.identifier
+                                                    }
+
+                                                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
+                                                }
                                         }
                                     }
+
                             }
                             .padding(Spacing.md)
                             .background(Color.white)
