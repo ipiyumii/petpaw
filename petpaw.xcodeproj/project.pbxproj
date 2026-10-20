@@ -15,8 +15,16 @@
 		9F06D5283077C4D000B191AD /* userProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D5273077C4D000B191AD /* userProfileScreen.swift */; };
 		9F06D52C307811D300B191AD /* bioMetricService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06D52B307811D300B191AD /* bioMetricService.swift */; };
 		9F0D24C63074325A00BCD900 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */; };
+		9F461DC83087D66D005CB177 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5EDB5307424E7004A9E67 /* constants.swift */; };
+		9F461DC93087D8FC005CB177 /* PetPaw.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FD173D730801F6E006571D8 /* PetPaw.xcdatamodeld */; };
 		9F524A973083FC30005D5830 /* healthTimelineUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F524A963083FC30005D5830 /* healthTimelineUI.swift */; };
 		9F524A993083FCB1005D5830 /* healthTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F524A983083FCB1005D5830 /* healthTimelineService.swift */; };
+		9F524AB83087D365005D5830 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F524AA03087D026005D5830 /* WidgetKit.framework */; };
+		9F524AB93087D365005D5830 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F524AA23087D026005D5830 /* SwiftUI.framework */; };
+		9F524ABC3087D365005D5830 /* pet_paw_widgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F524ABB3087D365005D5830 /* pet_paw_widgetBundle.swift */; };
+		9F524ABE3087D365005D5830 /* pet_paw_widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F524ABD3087D365005D5830 /* pet_paw_widget.swift */; };
+		9F524AC03087D369005D5830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F524ABF3087D369005D5830 /* Assets.xcassets */; };
+		9F524AC43087D369005D5830 /* pet-paw-widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F524AB73087D365005D5830 /* pet-paw-widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8CD3075580C00228A18 /* firebaseConfig.swift */; };
 		9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D0307574DD00228A18 /* addPetScreen.swift */; };
 		9F68D8D33075753500228A18 /* selectImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D23075753500228A18 /* selectImage.swift */; };
@@ -73,6 +81,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9F524AC23087D369005D5830 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F92183B3072BA2100A3D0A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F524AB63087D365005D5830;
+			remoteInfo = "pet-paw-widgetExtension";
+		};
 		9F9218543072BA2500A3D0A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9F92183B3072BA2100A3D0A8 /* Project object */;
@@ -89,6 +104,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9F524AAF3087D029005D5830 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9F524AC43087D369005D5830 /* pet-paw-widgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9F06D5163076D99800B191AD /* tabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarView.swift; sourceTree = "<group>"; };
 		9F06D51A3077B6E800B191AD /* userProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfile.swift; sourceTree = "<group>"; };
@@ -98,8 +127,18 @@
 		9F06D5273077C4D000B191AD /* userProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfileScreen.swift; sourceTree = "<group>"; };
 		9F06D52B307811D300B191AD /* bioMetricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bioMetricService.swift; sourceTree = "<group>"; };
 		9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9F461DC63087D531005CB177 /* petpaw.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = petpaw.entitlements; sourceTree = "<group>"; };
+		9F461DC73087D583005CB177 /* pet-paw-widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pet-paw-widgetExtension.entitlements"; sourceTree = "<group>"; };
+		9F461DCA3087DC4F005CB177 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9F524A963083FC30005D5830 /* healthTimelineUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthTimelineUI.swift; sourceTree = "<group>"; };
 		9F524A983083FCB1005D5830 /* healthTimelineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthTimelineService.swift; sourceTree = "<group>"; };
+		9F524AA03087D026005D5830 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		9F524AA23087D026005D5830 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9F524AB73087D365005D5830 /* pet-paw-widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "pet-paw-widgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F524ABB3087D365005D5830 /* pet_paw_widgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_paw_widgetBundle.swift; sourceTree = "<group>"; };
+		9F524ABD3087D365005D5830 /* pet_paw_widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_paw_widget.swift; sourceTree = "<group>"; };
+		9F524ABF3087D369005D5830 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F524AC13087D369005D5830 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F68D8CD3075580C00228A18 /* firebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseConfig.swift; sourceTree = "<group>"; };
 		9F68D8D0307574DD00228A18 /* addPetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPetScreen.swift; sourceTree = "<group>"; };
 		9F68D8D23075753500228A18 /* selectImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectImage.swift; sourceTree = "<group>"; };
@@ -151,6 +190,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9F524AB43087D365005D5830 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F524AB93087D365005D5830 /* SwiftUI.framework in Frameworks */,
+				9F524AB83087D365005D5830 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9218403072BA2100A3D0A8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,6 +258,26 @@
 			path = States;
 			sourceTree = "<group>";
 		};
+		9F524A9F3087D026005D5830 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F524AA03087D026005D5830 /* WidgetKit.framework */,
+				9F524AA23087D026005D5830 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F524ABA3087D365005D5830 /* pet-paw-widget */ = {
+			isa = PBXGroup;
+			children = (
+				9F524ABB3087D365005D5830 /* pet_paw_widgetBundle.swift */,
+				9F524ABD3087D365005D5830 /* pet_paw_widget.swift */,
+				9F524ABF3087D369005D5830 /* Assets.xcassets */,
+				9F524AC13087D369005D5830 /* Info.plist */,
+			);
+			path = "pet-paw-widget";
+			sourceTree = "<group>";
+		};
 		9F68D8CF307574C000228A18 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +312,7 @@
 		9F92183A3072BA2100A3D0A8 = {
 			isa = PBXGroup;
 			children = (
+				9F461DC73087D583005CB177 /* pet-paw-widgetExtension.entitlements */,
 				9FD173D730801F6E006571D8 /* PetPaw.xcdatamodeld */,
 				9F0D24C53074325A00BCD900 /* GoogleService-Info.plist */,
 				9F9218773072BBE900A3D0A8 /* View */,
@@ -255,6 +324,8 @@
 				9F9218453072BA2100A3D0A8 /* petpaw */,
 				9F9218563072BA2500A3D0A8 /* petpawTests */,
 				9F9218603072BA2500A3D0A8 /* petpawUITests */,
+				9F524ABA3087D365005D5830 /* pet-paw-widget */,
+				9F524A9F3087D026005D5830 /* Frameworks */,
 				9F9218443072BA2100A3D0A8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -265,6 +336,7 @@
 				9F9218433072BA2100A3D0A8 /* petpaw.app */,
 				9F9218533072BA2500A3D0A8 /* petpawTests.xctest */,
 				9F92185D3072BA2500A3D0A8 /* petpawUITests.xctest */,
+				9F524AB73087D365005D5830 /* pet-paw-widgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -272,6 +344,8 @@
 		9F9218453072BA2100A3D0A8 /* petpaw */ = {
 			isa = PBXGroup;
 			children = (
+				9F461DCA3087DC4F005CB177 /* Info.plist */,
+				9F461DC63087D531005CB177 /* petpaw.entitlements */,
 				9F9218463072BA2100A3D0A8 /* petpawApp.swift */,
 				9F9218483072BA2100A3D0A8 /* ContentView.swift */,
 				9F92184A3072BA2400A3D0A8 /* Assets.xcassets */,
@@ -452,6 +526,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9F524AB63087D365005D5830 /* pet-paw-widgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F524AC53087D369005D5830 /* Build configuration list for PBXNativeTarget "pet-paw-widgetExtension" */;
+			buildPhases = (
+				9F524AB33087D365005D5830 /* Sources */,
+				9F524AB43087D365005D5830 /* Frameworks */,
+				9F524AB53087D365005D5830 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "pet-paw-widgetExtension";
+			productName = "pet-paw-widgetExtension";
+			productReference = 9F524AB73087D365005D5830 /* pet-paw-widgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9F9218423072BA2100A3D0A8 /* petpaw */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F9218673072BA2500A3D0A8 /* Build configuration list for PBXNativeTarget "petpaw" */;
@@ -459,10 +550,12 @@
 				9F92183F3072BA2100A3D0A8 /* Sources */,
 				9F9218403072BA2100A3D0A8 /* Frameworks */,
 				9F9218413072BA2100A3D0A8 /* Resources */,
+				9F524AAF3087D029005D5830 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9F524AC33087D369005D5830 /* PBXTargetDependency */,
 			);
 			name = petpaw;
 			packageProductDependencies = (
@@ -519,6 +612,9 @@
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					9F524AB63087D365005D5830 = {
+						CreatedOnToolsVersion = 15.2;
+					};
 					9F9218423072BA2100A3D0A8 = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -551,11 +647,20 @@
 				9F9218423072BA2100A3D0A8 /* petpaw */,
 				9F9218523072BA2500A3D0A8 /* petpawTests */,
 				9F92185C3072BA2500A3D0A8 /* petpawUITests */,
+				9F524AB63087D365005D5830 /* pet-paw-widgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9F524AB53087D365005D5830 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F524AC03087D369005D5830 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9218413072BA2100A3D0A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -583,6 +688,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9F524AB33087D365005D5830 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F461DC93087D8FC005CB177 /* PetPaw.xcdatamodeld in Sources */,
+				9F524ABE3087D365005D5830 /* pet_paw_widget.swift in Sources */,
+				9F524ABC3087D365005D5830 /* pet_paw_widgetBundle.swift in Sources */,
+				9F461DC83087D66D005CB177 /* constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F92183F3072BA2100A3D0A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -665,6 +781,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9F524AC33087D369005D5830 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F524AB63087D365005D5830 /* pet-paw-widgetExtension */;
+			targetProxy = 9F524AC23087D369005D5830 /* PBXContainerItemProxy */;
+		};
 		9F9218553072BA2500A3D0A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9F9218423072BA2100A3D0A8 /* petpaw */;
@@ -678,6 +799,62 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		9F524AC63087D369005D5830 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "pet-paw-widgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3D3KVDMTWG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "pet-paw-widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "pet-paw-widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.piyumi.petpaw.pet-paw-widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9F524AC73087D369005D5830 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "pet-paw-widgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3D3KVDMTWG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "pet-paw-widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "pet-paw-widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.piyumi.petpaw.pet-paw-widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		9F9218653072BA2500A3D0A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -800,14 +977,17 @@
 		9F9218683072BA2500A3D0A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = petpaw/petpaw.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"petpaw/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D3KVDMTWG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = petpaw/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "petpaw uses your camera to take health scan photos";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "petpaw needs you to scan your face to login";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "petpaw uses your location to find nearby ver clinics";
@@ -832,14 +1012,17 @@
 		9F9218693072BA2500A3D0A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = petpaw/petpaw.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"petpaw/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D3KVDMTWG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = petpaw/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "petpaw uses your camera to take health scan photos";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "petpaw needs you to scan your face to login";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "petpaw uses your location to find nearby ver clinics";
@@ -942,6 +1125,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9F524AC53087D369005D5830 /* Build configuration list for PBXNativeTarget "pet-paw-widgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F524AC63087D369005D5830 /* Debug */,
+				9F524AC73087D369005D5830 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9F92183E3072BA2100A3D0A8 /* Build configuration list for PBXProject "petpaw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
