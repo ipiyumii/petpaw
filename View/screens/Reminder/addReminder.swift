@@ -54,6 +54,10 @@ struct AddReminder: View {
     @State private var repeatOption = "None"
     @State private var notes = ""
 
+    init(initialType: String = "meds") {
+        _type = State(initialValue: ReminderType(rawValue: initialType) ?? .meds)
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {

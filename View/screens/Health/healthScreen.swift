@@ -145,6 +145,7 @@ struct HealthOverviewSection: View {
     var onEditWeight: () -> Void
     private let observationService = HealthObservationService()
     @State private var latestObservation: HealthObservation?
+    @State private var showTimeline = false
     
     var body: some View {
         VStack(spacing: Spacing.md)
@@ -158,6 +159,9 @@ struct HealthOverviewSection: View {
             if let petId = petsViewModel.selectedPet?.id {
                 latestObservation = observationService.fetchObservations(petId: petId).first
             }
+        }
+        .sheet (isPresented: $showTimeline) {
+            HealthTimelineUI()
         }
     }
 
@@ -334,37 +338,84 @@ struct HealthOverviewSection: View {
                 .font(PetPawTypography.h3)
                 .foregroundColor(PetPawColors.textPrimary)
 
-            ComingSoonRow(
-                icon: "syringe.fill",
-                iconColor: PetPawColors.info,
-                title: "Vaccinations"
-            )
 
-            ComingSoonRow(
-                icon: "pills.fill",
-                iconColor: PetPawColors.warning,
-                title: "Medications"
-            )
+            Button(action: {
+                showTimeline = true
+            }) {
+                HStack {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .foregroundColor(PetPawColors.info)
+                        .frame(width: 44, height: 44)
+                        .background(PetPawColors.info.opacity(0.12))
+                        .clipShape(Circle())
+
+                    VStack(alignment: .leading) {
+                        Text("Vaccinations & Medications")
+                            .font(PetPawTypography.body.weight(.semibold))
+                            .foregroundColor(PetPawColors.textPrimary)
+
+                        Text("View the full Health Timeline")
+                            .font(PetPawTypography.caption)
+                            .foregroundColor(PetPawColors.textTertiary)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(PetPawColors.textTertiary.opacity(0.5))
+                }
+                .padding(Spacing.md)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(color: PetPawColors.shadowLight, radius: 8, x: 0, y: 4)
+            }
+            .buttonStyle(.plain)
+
         }
     }
 }
 
 struct HealthRecordsSection: View {
+    @State private var showTimeline = false
+
     var body: some View {
         VStack(spacing: Spacing.md) {
-            ComingSoonRow(
-                icon: "syringe.fill",
-                iconColor: PetPawColors.info,
-                title: "Vaccinations",
-                subtitle: "Track due dates for shots"
-            )
+            Button(action: {
+                showTimeline = true
+            }) {
+                HStack {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .foregroundColor(PetPawColors.primary)
+                        .frame(width: 44, height: 44)
+                        .background(PetPawColors.primary.opacity(0.12))
+                        .clipShape(Circle())
 
-            ComingSoonRow(
-                icon: "pills.fill",
-                iconColor: PetPawColors.warning,
-                title: "Medications",
-                subtitle: "Keep a log of active courses"
-            )
+                    VStack(alignment: .leading) {
+                        Text("Health Timeline")
+                            .font(PetPawTypography.body.weight(.semibold))
+                            .foregroundColor(PetPawColors.textPrimary)
+
+                        Text("Vaccines, medication, vet visits & scans in one view")
+                            .font(PetPawTypography.caption)
+                            .foregroundColor(PetPawColors.textTertiary)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(PetPawColors.textTertiary.opacity(0.5))
+                }
+                .padding(Spacing.md)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(color: PetPawColors.shadowLight,radius: 8,x: 0,y: 4)
+            }
+            .buttonStyle(.plain)
+        }
+        .sheet(isPresented: $showTimeline)
+        {
+            HealthTimelineUI()
         }
     }
 }
