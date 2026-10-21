@@ -62,7 +62,7 @@ struct dashboard: View {
         .ignoresSafeArea()
     }
 
-     private var header: some View {
+private var header: some View {
         HStack(spacing: Spacing.md) {
             Button(action: {
                 showSettings = true
@@ -72,18 +72,18 @@ struct dashboard: View {
                         .fill(PetPawColors.primary.opacity(0.12))
                         .frame(width: 44, height: 44)
 
-                    Image(systemName: "pawprint.fill")
+                    Image(systemName: "person.fill")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(PetPawColors.primary)
                 }
             }
 
-            .accessibilityLabel("Your profile")
+            .accessibilityLabel("Settings")
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(greeting)
                     .font(PetPawTypography.bodySmall)
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
                 Text(firstName)
                     .font(PetPawTypography.h2)
                     .foregroundColor(PetPawColors.textPrimary)
@@ -138,7 +138,7 @@ struct dashboard: View {
 
                             Text(petSubtitle(for: pet))
                                 .font(PetPawTypography.bodySmall)
-                                .foregroundColor(PetPawColors.textSecondary)
+                                .foregroundColor(PetPawColors.textPrimary)
 
                             HStack(spacing: 2) {
                                 Text("View profile")
@@ -200,7 +200,7 @@ struct dashboard: View {
                         .foregroundColor(PetPawColors.textPrimary)
                     Text("Create a profile to start tracking their health")
                         .font(PetPawTypography.bodySmall)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                         .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
@@ -309,7 +309,7 @@ struct dashboard: View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("Quick actions")
                 .font(PetPawTypography.h3)
-                .foregroundColor(PetPawColors.textPrimary)
+                .foregroundColor(PetPawColors.textSecondary)
 
             LazyVGrid(columns: gridColumns, spacing: Spacing.sm) {
                 QuickActionButton(icon: "viewfinder", title: "Scan", color: PetPawColors.primary) {

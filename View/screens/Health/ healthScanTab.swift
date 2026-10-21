@@ -107,7 +107,7 @@ struct HealthScanTab: View {
             CameraCapture(image: $capturedImage)
         }
         .sheet(isPresented: $showLibraryPicker) {
-            selectImage(image: $capturedImage)
+            selectImage(image: $capturedImage, isPresented: $showLibraryPicker)
         }
     }
 
@@ -155,7 +155,7 @@ struct HealthScanTab: View {
 
                     Text("Position the area in frame")
                         .font(PetPawTypography.bodySmall)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                 }
             }
         }
@@ -400,16 +400,16 @@ private var observationBanner: some View {
                 {
                     Text("Mild redness or irritation may be present. Monitor for changes and consult your vet if it worsens.")
                         .font(PetPawTypography.caption)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                 } else {
                     Text("No obvious signs of concern were noticed. Keep an eye out for any changes.")
                         .font(PetPawTypography.caption)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                 }
             } else {
                 Text("Automated analysis isn't available in this version yet. Share this photo with your vet to get it checked.")
                     .font(PetPawTypography.bodySmall)
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
             }
         }
     }

@@ -52,7 +52,7 @@ struct UserProfileScreen: View {
             }
         }
         .sheet(isPresented: $showPhotoPicker) {
-            selectImage(image: $selectedPhoto)
+            selectImage(image: $selectedPhoto, isPresented: $showPhotoPicker)
         }
         .task {
             await loadProfile()
@@ -125,24 +125,12 @@ struct UserProfileScreen: View {
 
     private var profileHeader: some View {
         VStack(spacing: Spacing.sm) {
-            ZStack(alignment: .bottom) {
-                LinearGradient(
-                    gradient: Gradient(colors: [PetPawColors.primaryLight, PetPawColors.primary, PetPawColors.successDark]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .overlay(bannerDecoration)
-                .frame(height: 150)
-                .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-
                 ProfileAvatarView(
                     selectedPhoto: selectedPhoto,
                     fullName: viewModel.profile?.fullName ?? "",
                     onTap: { showPhotoPicker = true }
-                )
-                .offset(y: 48)
-            }
-            .padding(.bottom, 48)
+                )            
+            .padding(.top, Spacing.md)
 
             Text(viewModel.profile?.fullName ?? "")
                 .font(PetPawTypography.h3)
@@ -484,7 +472,7 @@ private struct ProfileBioCard<Value: View>: View {
 
                 Text("About Me")
                     .font(PetPawTypography.bodySmall.weight(.semibold))
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
 
                 Spacer()
 

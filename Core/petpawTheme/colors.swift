@@ -24,7 +24,7 @@ struct PetPawColors {
     static let accentBlue = Color(red: 0.231, green: 0.510, blue: 0.965)
     
     //text color
-    static let textPrimary = Color(red: 0.408, green: 0.474, blue: 0.435)
+    static let textPrimary = Color.black
     static let textSecondary = Color(red: 0.42, green: 0.458, blue: 0.49)
     static let textTertiary = Color(red: 0.612, green: 0.639, blue: 0.667)
 

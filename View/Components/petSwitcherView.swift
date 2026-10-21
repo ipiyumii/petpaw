@@ -57,7 +57,7 @@ struct PetSwitcherView: View {
                     
                     Text(pet.name.isEmpty ? "Pet" : pet.name)
                         .font(PetPawTypography.caption)
-                        .foregroundColor(isSelected ? PetPawColors.primary : PetPawColors.textSecondary)
+                        .foregroundColor(isSelected ? PetPawColors.primary : PetPawColors.textPrimary)
                         .lineLimit(1)
                         .frame(width: 64)
                 }

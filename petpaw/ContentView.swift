@@ -20,7 +20,7 @@ struct ContentView: View {
 
                     Text("Health care for your beloved pets")
                         .font(PetPawTypography.body)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                     
                 }
                 .padding(.top, Spacing.xxl)
@@ -80,7 +80,7 @@ struct FeatureRow: View {
 
                 Text(subtitle)
                     .font(PetPawTypography.caption)
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
             }
             Spacer()
 

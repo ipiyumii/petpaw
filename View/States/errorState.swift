@@ -19,7 +19,7 @@ struct ErrorState: View {
 
             Text(message)
                 .font(PetPawTypography.body)
-                .foregroundColor(PetPawColors.textSecondary)
+                .foregroundColor(PetPawColors.textPrimary)
                 .multilineTextAlignment(.center)
 
             Button("Try Again") {

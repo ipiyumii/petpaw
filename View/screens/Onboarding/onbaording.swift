@@ -30,7 +30,7 @@ struct OnboardingView: View {
             }
         }
         .sheet(isPresented: $showImagePicker) {
-            selectImage(image: $selectedPetImage)
+            selectImage(image: $selectedPetImage, isPresented: $showImagePicker)
         }
     }
 }

@@ -109,7 +109,7 @@ struct findVetUI: View {
                 {
                     Text("Location is disabled. You can still search for clinics on the map.")
                         .font(PetPawTypography.bodySmall)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                         .padding()
                 }
 
@@ -189,12 +189,12 @@ struct findVetUI: View {
 
                 Text(clinic.address.isEmpty ? "Address unavailable" : clinic.address)
                     .font(PetPawTypography.caption)
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
 
                 if let phone = clinic.phone, !phone.isEmpty {
                     Text(phone)
                         .font(PetPawTypography.caption)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                 }
 
                 if let distance = clinic.distance 

@@ -97,7 +97,7 @@ struct HealthScreen: View {
                     Text(item.title)
                         .font(PetPawTypography.bodySmall.weight(.semibold))
                         .foregroundColor(
-                            segment == item ? .white : PetPawColors.textSecondary
+                            segment == item ? .white : PetPawColors.textPrimary
                         )
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, Spacing.sm)

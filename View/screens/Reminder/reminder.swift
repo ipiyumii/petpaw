@@ -48,7 +48,7 @@ struct ReminderUI: View {
 
                 Text("Try saying \"Hey Siri, log medicine for [pet name] in PetPaw\"")
                     .font(PetPawTypography.caption)
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
                     .padding(.horizontal, Spacing.lg)
 
                 if reminders.isEmpty {
