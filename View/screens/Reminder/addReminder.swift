@@ -46,6 +46,7 @@ struct AddReminder: View {
     @EnvironmentObject var petsViewModel: PetsViewModel
 
     private let repeatOptions = ["None", "Daily", "Weekly", "Monthly"]
+    private let isLoggingHealthEvent: Bool
 
     @State private var type: ReminderType = .meds
     @State private var title = ""
@@ -54,8 +55,9 @@ struct AddReminder: View {
     @State private var repeatOption = "None"
     @State private var notes = ""
 
-    init(initialType: String = "meds") {
+    init(initialType: String = "meds", isLoggingHealthEvent: Bool = false) {
         _type = State(initialValue: ReminderType(rawValue: initialType) ?? .meds)
+        self.isLoggingHealthEvent = isLoggingHealthEvent
     }
 
     var body: some View {
@@ -90,14 +92,16 @@ struct AddReminder: View {
                         .datePickerStyle(.compact)
                     }
 
-                    fieldSection(label: "Repeat") {
-                        Picker("Repeat", selection: $repeatOption) {
-                            ForEach(repeatOptions, id: \.self) { option in
-                                Text(option)
-                            }
+                    if !isLoggingHealthEvent {
+                        fieldSection(label: "Repeat") {
+                            Picker("Repeat", selection: $repeatOption) {
+                                ForEach(repeatOptions, id: \.self) { option in
+                                    Text(option).tag(option)
                         }
+                    }
                         .pickerStyle(.menu)
                     }
+                }
 
                     fieldSection(label: "Notes (optional)") {
                         TextField(
@@ -123,7 +127,7 @@ struct AddReminder: View {
                 )
                 .ignoresSafeArea()
             )
-            .navigationTitle("New Reminder")
+            .navigationTitle(isLoggingHealthEvent ? "Log health event" : "New Reminder")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -204,7 +208,7 @@ struct AddReminder: View {
         Button {
             save()
         } label: {
-            Text("Save reminder")
+            Text(isLoggingHealthEvent ? "Save event": "Save Reminder")
                 .font(PetPawTypography.button)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
