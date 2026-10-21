@@ -107,7 +107,7 @@ struct HealthScanTab: View {
             CameraCapture(image: $capturedImage)
         }
         .sheet(isPresented: $showLibraryPicker) {
-            selectImage(image: $capturedImage)
+            selectImage(image: $capturedImage, isPresented: $showLibraryPicker)
         }
     }
 

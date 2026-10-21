@@ -10,7 +10,8 @@ import PhotosUI
 
 struct selectImage: UIViewControllerRepresentable {
     @Binding var image: UIImage?
-    @Environment(\.dismiss) var dismiss
+    // @Environment(\.dismiss) var dismiss
+    @Binding var isPresented: Bool
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
@@ -37,6 +38,7 @@ struct selectImage: UIViewControllerRepresentable {
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]){
             picker.dismiss(animated: true)
             guard let provider = results.first?.itemProvider else { 
+                parent.isPresented = false
                 return
              }
 
@@ -44,9 +46,11 @@ struct selectImage: UIViewControllerRepresentable {
                 provider.loadObject(ofClass: UIImage.self) { image, _ in
                     DispatchQueue.main.async {
                         self.parent.image = image as? UIImage
-                        self.parent.dismiss()
+                        self.parent.isPresented = false
                     }
                 }
+            } else {
+                parent.isPresented = false
             }
         }
     }

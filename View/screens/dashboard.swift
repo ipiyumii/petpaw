@@ -62,7 +62,7 @@ struct dashboard: View {
         .ignoresSafeArea()
     }
 
-     private var header: some View {
+private var header: some View {
         HStack(spacing: Spacing.md) {
             Button(action: {
                 showSettings = true
@@ -72,13 +72,13 @@ struct dashboard: View {
                         .fill(PetPawColors.primary.opacity(0.12))
                         .frame(width: 44, height: 44)
 
-                    Image(systemName: "pawprint.fill")
+                    Image(systemName: "person.fill")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(PetPawColors.primary)
                 }
             }
 
-            .accessibilityLabel("Your profile")
+            .accessibilityLabel("Settings")
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(greeting)

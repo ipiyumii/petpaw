@@ -67,7 +67,7 @@ struct PetProfile: View {
             }
         }
         .sheet(isPresented: $viewModel.showPhotoPicker) {
-            selectImage(image: $viewModel.selectedPhoto)
+            selectImage(image: $viewModel.selectedPhoto, isPresented: $viewModel.showPhotoPicker)
         }
         .navigationBarHidden(true)
         .onAppear {
