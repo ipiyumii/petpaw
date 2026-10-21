@@ -64,12 +64,12 @@ class AuthViewModel: ObservableObject{
             return false
         }
 
-        guard signUpPassword.count >= 6 else {
-            handleError("Password must be at least 6 characters")
+        guard isPasswordValid(signUpPassword) else {
+            handleError("Password must be at least 8 characters; one uppercase one lowercase one number and a one special character")
             return false
         }
 
-        guard signUpPassword == signUpConfirmPassword else {
+        guard passwordsMatch(signUpPassword, confirmPassword: signUpConfirmPassword) else {
             handleError("Passwords do not match")
             return false
         }
@@ -119,11 +119,17 @@ class AuthViewModel: ObservableObject{
     }
 
     func isPasswordValid(_ password: String) -> Bool {
-        return password.count >= 6
+        guard password.count > 8 else { return false }
+        let hasUppercase = password.contains(where: { $0.isUppercase })
+        let hasLowercase = password.contains(where: { $0.isLowercase })
+        let hasNumber = password.contains(where: { $0.isNumber })
+        let specialCharacters = CharacterSet(charactersIn: "!@#$%^&*()_+-=[]{}|;:,.<>?")
+        let hasSpecialCharacter = password.unicodeScalars.contains(where: specialCharacters.contains)
+        return hasUppercase && hasLowercase && hasNumber && hasSpecialCharacter
     }
 
     func passwordsMatch(_ password: String, confirmPassword: String) -> Bool {
-        return password == confirmPassword && password.count >= 6
+        password == confirmPassword && isPasswordValid(password)
     }
 
     
