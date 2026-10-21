@@ -25,6 +25,10 @@
 		9F524ABE3087D365005D5830 /* pet_paw_widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F524ABD3087D365005D5830 /* pet_paw_widget.swift */; };
 		9F524AC03087D369005D5830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F524ABF3087D369005D5830 /* Assets.xcassets */; };
 		9F524AC43087D369005D5830 /* pet-paw-widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F524AB73087D365005D5830 /* pet-paw-widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F5B22443088C54B00CC44F8 /* authValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B22433088C54B00CC44F8 /* authValidationTest.swift */; };
+		9F5B22463088C8EC00CC44F8 /* healthTimelineServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B22453088C8EC00CC44F8 /* healthTimelineServiceTest.swift */; };
+		9F5B22483088DA4300CC44F8 /* petProfileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B22473088DA4300CC44F8 /* petProfileTest.swift */; };
+		9F5B224C3088DAC900CC44F8 /* userProfileViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B224B3088DAC900CC44F8 /* userProfileViewModelTest.swift */; };
 		9F68D8CE3075580C00228A18 /* firebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8CD3075580C00228A18 /* firebaseConfig.swift */; };
 		9F68D8D1307574DD00228A18 /* addPetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D0307574DD00228A18 /* addPetScreen.swift */; };
 		9F68D8D33075753500228A18 /* selectImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8D23075753500228A18 /* selectImage.swift */; };
@@ -139,6 +143,10 @@
 		9F524ABD3087D365005D5830 /* pet_paw_widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_paw_widget.swift; sourceTree = "<group>"; };
 		9F524ABF3087D369005D5830 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F524AC13087D369005D5830 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F5B22433088C54B00CC44F8 /* authValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authValidationTest.swift; sourceTree = "<group>"; };
+		9F5B22453088C8EC00CC44F8 /* healthTimelineServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healthTimelineServiceTest.swift; sourceTree = "<group>"; };
+		9F5B22473088DA4300CC44F8 /* petProfileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petProfileTest.swift; sourceTree = "<group>"; };
+		9F5B224B3088DAC900CC44F8 /* userProfileViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userProfileViewModelTest.swift; sourceTree = "<group>"; };
 		9F68D8CD3075580C00228A18 /* firebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseConfig.swift; sourceTree = "<group>"; };
 		9F68D8D0307574DD00228A18 /* addPetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPetScreen.swift; sourceTree = "<group>"; };
 		9F68D8D23075753500228A18 /* selectImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectImage.swift; sourceTree = "<group>"; };
@@ -368,6 +376,10 @@
 			children = (
 				9F9218573072BA2500A3D0A8 /* petpawTests.swift */,
 				9FD173F83082ACFB006571D8 /* reminderTest.swift */,
+				9F5B22433088C54B00CC44F8 /* authValidationTest.swift */,
+				9F5B22453088C8EC00CC44F8 /* healthTimelineServiceTest.swift */,
+				9F5B22473088DA4300CC44F8 /* petProfileTest.swift */,
+				9F5B224B3088DAC900CC44F8 /* userProfileViewModelTest.swift */,
 			);
 			path = petpawTests;
 			sourceTree = "<group>";
@@ -758,10 +770,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F5B22443088C54B00CC44F8 /* authValidationTest.swift in Sources */,
+				9F5B22483088DA4300CC44F8 /* petProfileTest.swift in Sources */,
 				9F9218903073E91100A3D0A8 /* signup.swift in Sources */,
 				9FD5EDB330741E2D004A9E67 /* root.swift in Sources */,
 				9FD173F93082ACFB006571D8 /* reminderTest.swift in Sources */,
 				9F9218583072BA2500A3D0A8 /* petpawTests.swift in Sources */,
+				9F5B22463088C8EC00CC44F8 /* healthTimelineServiceTest.swift in Sources */,
+				9F5B224C3088DAC900CC44F8 /* userProfileViewModelTest.swift in Sources */,
 				9F92188C3073E6CE00A3D0A8 /* login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
