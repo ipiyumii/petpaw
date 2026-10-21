@@ -11,6 +11,6 @@ import SwiftUI
 @main
 struct pet_paw_widgetBundle: WidgetBundle {
     var body: some Widget {
-        pet_paw_widget()
+        PetPawWidget()
     }
 }

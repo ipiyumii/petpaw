@@ -13,6 +13,7 @@ struct constants{
     struct CoreData {
         static let modelName = "PetPaw"
         static let appGroupId = "group.com.piyumi.petpaw"
+        static let containerName = "PetPaw"
     } 
 
     struct Firebase {
