@@ -43,6 +43,10 @@ struct HealthScreen: View {
                 header
                 segmentedControl
 
+            if segment == .records {
+                content
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
                 ScrollView(showsIndicators: false) {
                     content
                     .padding(.horizontal, Spacing.lg)
@@ -50,10 +54,10 @@ struct HealthScreen: View {
                     .padding(.bottom, Spacing.xl)
                     .frame(maxWidth: 700)
                 }
-
                 .frame(maxWidth: .infinity)
             }
         }
+    }
         .sheet(isPresented: $showFindVetUI) {
             findVetUI()
         }
@@ -128,7 +132,11 @@ struct HealthScreen: View {
                     onEditWeight: 
                     {
                         onSelectTab(.pets)
-                    }
+                    },
+                    onViewRecords: 
+                    { 
+                        segment = .records 
+                    }       
                 )
 
             case .scan: HealthScanTab()
@@ -143,9 +151,9 @@ struct HealthOverviewSection: View {
 
     var onStartScan: () -> Void
     var onEditWeight: () -> Void
+    var onViewRecords: () -> Void
     private let observationService = HealthObservationService()
     @State private var latestObservation: HealthObservation?
-    @State private var showTimeline = false
     
     var body: some View {
         VStack(spacing: Spacing.md)
@@ -159,9 +167,6 @@ struct HealthOverviewSection: View {
             if let petId = petsViewModel.selectedPet?.id {
                 latestObservation = observationService.fetchObservations(petId: petId).first
             }
-        }
-        .sheet (isPresented: $showTimeline) {
-            HealthTimelineUI()
         }
     }
 
@@ -339,9 +344,7 @@ struct HealthOverviewSection: View {
                 .foregroundColor(PetPawColors.textPrimary)
 
 
-            Button(action: {
-                showTimeline = true
-            }) {
+            Button(action: onViewRecords) {
                 HStack {
                     Image(systemName: "clock.arrow.circlepath")
                         .foregroundColor(PetPawColors.info)
@@ -376,47 +379,8 @@ struct HealthOverviewSection: View {
 }
 
 struct HealthRecordsSection: View {
-    @State private var showTimeline = false
-
     var body: some View {
-        VStack(spacing: Spacing.md) {
-            Button(action: {
-                showTimeline = true
-            }) {
-                HStack {
-                    Image(systemName: "clock.arrow.circlepath")
-                        .foregroundColor(PetPawColors.primary)
-                        .frame(width: 44, height: 44)
-                        .background(PetPawColors.primary.opacity(0.12))
-                        .clipShape(Circle())
-
-                    VStack(alignment: .leading) {
-                        Text("Health Timeline")
-                            .font(PetPawTypography.body.weight(.semibold))
-                            .foregroundColor(PetPawColors.textPrimary)
-
-                        Text("Vaccines, medication, vet visits & scans in one view")
-                            .font(PetPawTypography.caption)
-                            .foregroundColor(PetPawColors.textTertiary)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(PetPawColors.textTertiary.opacity(0.5))
-                }
-                .padding(Spacing.md)
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(color: PetPawColors.shadowLight,radius: 8,x: 0,y: 4)
-            }
-            .buttonStyle(.plain)
-        }
-        .sheet(isPresented: $showTimeline)
-        {
-            HealthTimelineUI()
-        }
+        HealthTimelineUI()
     }
 }
 

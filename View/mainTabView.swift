@@ -58,6 +58,11 @@ struct MainTabView: View {
         }.task {
             await petViewModel.loadPets(ownerId: AuthViewModel.authService.currentUser?.uid ?? "")
         }
+        .onOpenURL {
+            url in if url.host == "reminders" {
+                navigate (to: .reminders)
+            }
+        }
         
     }
 
