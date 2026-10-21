@@ -24,6 +24,12 @@ struct petpawApp: App {
     }
 }
 
+extension NSManagedObjectContext {
+    static var current: NSManagedObjectContext {
+        CoreDataManager.container.viewContext
+    }
+}
+
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
@@ -59,6 +65,15 @@ enum CoreDataManager {
     static let container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: constants.CoreData.modelName)
 
+        if let url = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: constants.CoreData.appGroupId
+        ) {
+            let storeURL = url.appendingPathComponent(
+                "\(constants.CoreData.containerName).sqlite"
+            )
+            container.persistentStoreDescriptions.first?.url = storeURL
+        }
+
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 print("Core Data loading error: \(error), \(error.userInfo)")
@@ -70,21 +85,21 @@ enum CoreDataManager {
         return container
     }()
 
-    static func saveContext() {
-        let context = container.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                print("Core Data save error: \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
+    // static func saveContext() {
+    //     let context = container.viewContext
+    //     if context.hasChanges {
+    //         do {
+    //             try context.save()
+    //         } catch {
+    //             let nserror = error as NSError
+    //             print("Core Data save error: \(nserror), \(nserror.userInfo)")
+    //         }
+    //     }
+    // }
 }
 
-extension NSManagedObjectContext {
-    static var current: NSManagedObjectContext {
-        CoreDataManager.container.viewContext
-    }
-}
+// extension NSManagedObjectContext {
+//     static var current: NSManagedObjectContext {
+//         CoreDataManager.container.viewContext
+//     }
+// }
