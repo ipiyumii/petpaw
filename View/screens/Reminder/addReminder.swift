@@ -145,7 +145,7 @@ struct AddReminder: View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("Type")
                 .font(PetPawTypography.caption)
-                .foregroundColor(PetPawColors.textSecondary)
+                .foregroundColor(PetPawColors.textPrimary)
 
             HStack(spacing: Spacing.sm) {
                 ForEach(ReminderType.allCases, id: \.self) { option in
@@ -196,7 +196,7 @@ struct AddReminder: View {
         VStack(alignment: .leading, spacing: Spacing.xs) {
             Text(label)
                 .font(PetPawTypography.caption)
-                .foregroundColor(PetPawColors.textSecondary)
+                .foregroundColor(PetPawColors.textPrimary)
 
             content()
                 .frame(maxWidth: .infinity, alignment: .leading)

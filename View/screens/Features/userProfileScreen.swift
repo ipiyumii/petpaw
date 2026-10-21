@@ -472,7 +472,7 @@ private struct ProfileBioCard<Value: View>: View {
 
                 Text("About Me")
                     .font(PetPawTypography.bodySmall.weight(.semibold))
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
 
                 Spacer()
 

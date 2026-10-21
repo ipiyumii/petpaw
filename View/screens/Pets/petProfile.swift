@@ -171,7 +171,7 @@ struct PetProfile: View {
     }
 
     private var basicInfoCard: some View {
-        PetInfoCard(title: "Basic Information") {
+        PetInfoCard() {
             PetInfoRow(
                 icon: "textformat",
                 iconColor: PetPawColors.primary,
@@ -225,7 +225,7 @@ struct PetProfile: View {
     }
 
     private var healthDetailsCard: some View {
-        PetInfoCard(title: "Health Details") {
+        PetInfoCard() {
             PetInfoRow(
                 icon: "calendar",
                 iconColor: PetPawColors.attention,
@@ -515,11 +515,11 @@ private struct PetBadgeChip: View {
 }
 
 private struct PetInfoCard<Content: View>: View {
-    let title: String
+    let title: String?
     let content: Content
 
     init(
-        title: String,
+        title: String? = nil,
         @ViewBuilder content: () -> Content
     ) {
         self.title = title
@@ -528,10 +528,12 @@ private struct PetInfoCard<Content: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
-            Text(title)
-                .font(PetPawTypography.h3)
-                .foregroundColor(PetPawColors.textPrimary)
-                .padding(.leading, Spacing.xs)
+            if let title {
+                Text(title)
+                    .font(PetPawTypography.h3)
+                    .foregroundColor(PetPawColors.textPrimary)
+                    .padding(.leading, Spacing.xs)
+            }
 
             VStack(spacing: Spacing.sm) {
                 content
@@ -589,16 +591,17 @@ private struct PetInfoRow<Value: View>: View {
                     .foregroundColor(iconColor)
             }
 
-            VStack(alignment: .leading, spacing: 3){
-                Text(label)
-                    .font(PetPawTypography.caption)
-                    .foregroundColor(PetPawColors.textSecondary)
-                value
-                    .font(PetPawTypography.body.weight(.medium))
-                    .foregroundColor(PetPawColors.textPrimary)
-            }
+            Text(label)
+                .font(PetPawTypography.body.weight(.bold))
+                .foregroundColor(PetPawColors.textPrimary)
 
-            Spacer()
+            Spacer(minLength: Spacing.sm)
+
+            value
+                .font(PetPawTypography.body)
+                .foregroundColor(PetPawColors.textPrimary)
+                .multilineTextAlignment(.trailing)
+                .lineLimit(1)
 
             if !isEditing{
                 Image(systemName: "chevron.right")
@@ -606,7 +609,8 @@ private struct PetInfoRow<Value: View>: View {
                     .foregroundColor(PetPawColors.textTertiary.opacity(0.4))
             }
         }
-        .padding(Spacing.md)
+        .padding(.horizontal, Spacing.md)
+        .padding(.vertical, Spacing.sm)
         .background(
             RoundedRectangle(cornerRadius: 18, style: .continuous).fill(Color.white)
         )

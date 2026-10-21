@@ -75,7 +75,7 @@ struct Settings: View {
 
                                 Text(viewModel.profile?.email ?? "")
                                     .font(PetPawTypography.bodySmall)
-                                    .foregroundColor(PetPawColors.textSecondary)
+                                    .foregroundColor(PetPawColors.textPrimary)
                             }
                         }
                         .buttonStyle(.plain)
@@ -153,7 +153,8 @@ struct Settings: View {
                                 iconColor: PetPawColors.textTertiary,
                                 labelColor: PetPawColors.textTertiary,
                                 trailingText: "Coming soon",
-                                showChevron: false
+                                showChevron: false,
+                                trailingTextColor: PetPawColors.textTertiary
                             )
                         }
 
@@ -262,6 +263,8 @@ private struct SettingsRow: View {
     var trailingText: String?
     var showChevron = true
     var onTap: (() -> Void)?
+    var  trailingTextColor: Color = PetPawColors.textPrimary
+
 
     var body: some View {
         HStack(spacing: Spacing.md) {

@@ -83,7 +83,7 @@ private var header: some View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(greeting)
                     .font(PetPawTypography.bodySmall)
-                    .foregroundColor(PetPawColors.textSecondary)
+                    .foregroundColor(PetPawColors.textPrimary)
                 Text(firstName)
                     .font(PetPawTypography.h2)
                     .foregroundColor(PetPawColors.textPrimary)
@@ -138,7 +138,7 @@ private var header: some View {
 
                             Text(petSubtitle(for: pet))
                                 .font(PetPawTypography.bodySmall)
-                                .foregroundColor(PetPawColors.textSecondary)
+                                .foregroundColor(PetPawColors.textPrimary)
 
                             HStack(spacing: 2) {
                                 Text("View profile")
@@ -200,7 +200,7 @@ private var header: some View {
                         .foregroundColor(PetPawColors.textPrimary)
                     Text("Create a profile to start tracking their health")
                         .font(PetPawTypography.bodySmall)
-                        .foregroundColor(PetPawColors.textSecondary)
+                        .foregroundColor(PetPawColors.textPrimary)
                         .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
@@ -309,7 +309,7 @@ private var header: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("Quick actions")
                 .font(PetPawTypography.h3)
-                .foregroundColor(PetPawColors.textPrimary)
+                .foregroundColor(PetPawColors.textSecondary)
 
             LazyVGrid(columns: gridColumns, spacing: Spacing.sm) {
                 QuickActionButton(icon: "viewfinder", title: "Scan", color: PetPawColors.primary) {
