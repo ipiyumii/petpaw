@@ -87,14 +87,14 @@ struct ReminderUI: View {
         }
     }
 
-    private func reminderRow(_ reminder: Reminder) -> some View {
+    func reminderRow(_ reminder: Reminder) -> some View {
         HStack(spacing: Spacing.md) {
             ZStack {
                 Circle()
                     .fill(iconColor(for: reminder.type).opacity(0.12))
                     .frame(width: 44, height: 44)
 
-                Image(systemName: icon(for: reminder.type))
+                Image(systemName: ReminderUI.icon(for: reminder.type))
                     .foregroundColor(iconColor(for: reminder.type))
             }
 
@@ -135,7 +135,7 @@ struct ReminderUI: View {
         .shadow(color: PetPawColors.shadowLight, radius: 4, x: 0, y: 2)
     }
 
-    private func icon(for type: String) -> String {
+    static func icon(for type: String) -> String {
         if type == "meds" 
         {
             return "pills.fill"
@@ -148,7 +148,7 @@ struct ReminderUI: View {
         }
     }
 
-    private func iconColor(for type: String) -> Color {
+    func iconColor(for type: String) -> Color {
         if type == "meds" {
             return PetPawColors.warning
         } else if type == "vaccine" {

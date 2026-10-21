@@ -76,8 +76,12 @@ struct PetProfile: View {
                 : ""
         }
         .onChange(of: weightText) { newValue in
-            viewModel.pet.weightKg = Double(newValue) ?? 0
+            viewModel.pet.weightKg = PetProfile.parseWeight(newValue)
         }
+    }
+
+    static func parseWeight(_ text: String) -> Double {
+        Double(text) ?? 0
     }
 
     private var background: some View {
