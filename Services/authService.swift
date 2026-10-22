@@ -119,6 +119,19 @@ class AuthService: NSObject, ObservableObject{
             errorMsg = error.localizedDescription
         }
     }
+
+    func resetPassword(email: String, completion: @escaping(Bool) -> Void){
+        Auth.auth().sendPasswordReset(withEmail: email) {
+            [weak self] error in DispatchQueue.main.async {
+                if let error = error{
+                    self?.errorMsg = self?.parseAuthError(error)
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        }
+    }
 }
     
     

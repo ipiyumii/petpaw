@@ -12,6 +12,7 @@ struct Login: View {
     @State private var isPasswordVisible = false
 //    @StateObject private var viewModel = AuthViewModel()
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var showForgotPassowrd = false
     
     var body: some View{
         ZStack{
@@ -160,7 +161,9 @@ struct Login: View {
 
                         HStack{
                             Spacer()
-                            NavigationLink(destination: Text("Forgot Password")){
+                            Button(action: {
+                                showForgotPassowrd = true
+                            }) {
                                 Text("Forgot password?")
                                     .font(.system(size: 12, weight: .semibold))
                                     .foregroundColor(PetPawColors.primary)
@@ -228,15 +231,113 @@ struct Login: View {
                     }
                     }
                     .frame(maxWidth: .infinity)
-                    
                     .padding(.vertical, 12)
                     .padding(.horizontal, 24)
                 }
                 .padding(.bottom, 20)
             }
         }
+
+        .sheet(isPresented: $showForgotPassowrd) {
+                    ForgotPasswordSheet(initialEmail: viewModel.loginEmail, authService: viewModel.authService)
+                }
+            }
+
+        }
+
+private struct ForgotPasswordSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @ObservedObject var authService: AuthService
+
+    @State private var email: String
+    @State private var isSending = false
+    @State private var resultMessage = ""
+    @State private var showAlert = false
+    @State private var didSucceed = false
+
+    init(initialEmail: String, authService: AuthService) {
+        self.authService = authService
+        _email = State(initialValue: initialEmail)
     }
 
+    var body: some View {
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 20) {
+                Text("Enter your email address to reset your password.")
+                    .font(.system(size: 14)).foregroundColor(.gray)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Email Address")
+                        .font(.system(size: 12, weight: .bold)).foregroundColor(.gray)
+
+                    TextField("you@example.com", text: $email)
+                        .textContentType(.emailAddress)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(12)
+                }
+
+                Button(action: sendReset) {
+                    if isSending {
+                        ProgressView("Sending...").tint(.white)
+                    } else {
+                        Text("Send Reset Link")
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 52)
+                .foregroundColor(.white)
+                .background(PetPawColors.primary)
+                .cornerRadius(13)
+                .disabled(email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSending)
+
+                Spacer()
+            }
+            .padding(24)
+            .navigationTitle("Reset Password")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Close") {
+                        dismiss()
+                    }
+                }
+            }
+            .alert("Reset Password", isPresented: $showAlert) {
+                Button("OK") {
+                    if didSucceed {
+                        dismiss()
+                    }
+                }
+            } message: {
+                Text(resultMessage)
+            }
+        }
+    }
+
+    private func sendReset() {
+        let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !trimmedEmail.isEmpty else { return }
+
+        isSending = true
+
+        authService.resetPassword(email: trimmedEmail) { 
+            success in
+            isSending = false
+            didSucceed = success
+
+            if success {
+                resultMessage = "A password reset link has been sent to \(trimmedEmail)."
+            } else {
+                resultMessage = authService.errorMsg ?? "Could not send the reset email. Please try again."
+            }
+
+            showAlert = true
+        }
+    }
 }
 
 #Preview {
