@@ -26,6 +26,7 @@ struct PetProfile: View {
     @FocusState private var focusedField: PetField?
     @State private var heroScale: CGFloat = 0.85
     @State private var heroOpacity: Double = 0
+    @State private var showHealthHistory = false
 
     init(pet: Pet, isNewPet: Bool) {
         _viewModel = StateObject(
@@ -68,6 +69,9 @@ struct PetProfile: View {
         }
         .sheet(isPresented: $viewModel.showPhotoPicker) {
             selectImage(image: $viewModel.selectedPhoto, isPresented: $viewModel.showPhotoPicker)
+        }
+        .sheet(isPresented: $showHealthHistory) {
+            PetHealthHistory(pet: viewModel.pet)
         }
         .navigationBarHidden(true)
         .onAppear {
@@ -349,24 +353,24 @@ struct PetProfile: View {
         .disabled(!viewModel.hasAnyInput || viewModel.isSaving)
         .accessibilityHint("Double-tap to save this pet's profile")
 
-        HStack {
-            Image(systemName: "waveform.path.ecg")
-            Text("View Health History")
-
-            Spacer()
-
-            Text("TODO")
-                .font(PetPawTypography.caption)
-                .foregroundColor(PetPawColors.textTertiary)
+        Button(action: { showHealthHistory = true }) {
+            HStack {
+                Image(systemName: "waveform.path.ecg")
+                Text("View Health History")
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .bold))
+                
+            }
+            .font(PetPawTypography.button)
+            .foregroundColor(PetPawColors.primary)
+            .frame(height: 54)
+            .padding(.horizontal, Spacing.md)
+            .overlay(
+                RoundedRectangle(cornerRadius: 14).stroke(PetPawColors.primary.opacity(0.4), lineWidth: 1.5)
+            )
         }
-        .font(PetPawTypography.button)
-        .foregroundColor(PetPawColors.textTertiary)
-        .frame(height: 54)
-        .padding(.horizontal, Spacing.md)
-
-        .overlay(
-            RoundedRectangle(cornerRadius: 14).stroke(PetPawColors.border, lineWidth: 1.5)
-        )
+        .buttonStyle(.plain)
     }
     .padding(.top, Spacing.sm)
     }
