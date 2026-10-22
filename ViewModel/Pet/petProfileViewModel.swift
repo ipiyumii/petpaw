@@ -16,11 +16,13 @@ final class PetProfileViewModel: ObservableObject {
     @Published var isSaving = false
     let isNewPet: Bool
     private let service: PetServiceProtocol
+    private var originalWeight: Double
 
     init(pet: Pet, isNewPet: Bool, service: PetServiceProtocol = PetService()) {
         self.pet = pet
         self.isNewPet = isNewPet
         self.service = service
+        self.originalWeight = pet.weightKg
     }
 
     var hasAnyInput: Bool {
@@ -58,6 +60,12 @@ final class PetProfileViewModel: ObservableObject {
                 try await service.createPet(pet)
             } else {
                 try await service.updatePet(pet)
+            }
+
+            if pet.weightKg != originalWeight 
+            {
+                WeightService().save(WeightEntry(id: UUID().uuidString, petId: pet.id, weightKg: pet.weightKg, date: Date()))
+                originalWeight = pet.weightKg
             }
 
             isSaving = false

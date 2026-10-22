@@ -38,6 +38,8 @@
 		9F68D8DB3075791900228A18 /* dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8DA3075791900228A18 /* dashboard.swift */; };
 		9F68D8EA3076C6D500228A18 /* mainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8E93076C6D500228A18 /* mainTabView.swift */; };
 		9F68D8ED3076C96D00228A18 /* todoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68D8EC3076C96C00228A18 /* todoScreen.swift */; };
+		9F7E6C39308943A5007F91EB /* petWeightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7E6C38308943A4007F91EB /* petWeightService.swift */; };
+		9F7E6C3B308944C3007F91EB /* petHealthHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7E6C3A308944C3007F91EB /* petHealthHistory.swift */; };
 		9F9218473072BA2100A3D0A8 /* petpawApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218463072BA2100A3D0A8 /* petpawApp.swift */; };
 		9F9218493072BA2100A3D0A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9218483072BA2100A3D0A8 /* ContentView.swift */; };
 		9F92184B3072BA2400A3D0A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F92184A3072BA2400A3D0A8 /* Assets.xcassets */; };
@@ -156,6 +158,8 @@
 		9F68D8DA3075791900228A18 /* dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dashboard.swift; sourceTree = "<group>"; };
 		9F68D8E93076C6D500228A18 /* mainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainTabView.swift; sourceTree = "<group>"; };
 		9F68D8EC3076C96C00228A18 /* todoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todoScreen.swift; sourceTree = "<group>"; };
+		9F7E6C38308943A4007F91EB /* petWeightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petWeightService.swift; sourceTree = "<group>"; };
+		9F7E6C3A308944C3007F91EB /* petHealthHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petHealthHistory.swift; sourceTree = "<group>"; };
 		9F9218433072BA2100A3D0A8 /* petpaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = petpaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9218463072BA2100A3D0A8 /* petpawApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petpawApp.swift; sourceTree = "<group>"; };
 		9F9218483072BA2100A3D0A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -505,6 +509,7 @@
 				9FD173E2308261D5006571D8 /* siriKitMedicine.swift */,
 				9FD173E8308289F9006571D8 /* reminderService.swift */,
 				9F524A983083FCB1005D5830 /* healthTimelineService.swift */,
+				9F7E6C38308943A4007F91EB /* petWeightService.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				9FD88C703076D29F006AE849 /* petProfile.swift */,
+				9F7E6C3A308944C3007F91EB /* petHealthHistory.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -719,6 +725,7 @@
 				9F06D5213077B77300B191AD /* profileViewModel.swift in Sources */,
 				9F06D52C307811D300B191AD /* bioMetricService.swift in Sources */,
 				9FD173CA307FAAFC006571D8 /* healthScreen.swift in Sources */,
+				9F7E6C3B308944C3007F91EB /* petHealthHistory.swift in Sources */,
 				9FD173D930801F6E006571D8 /* PetPaw.xcdatamodeld in Sources */,
 				9FD173E3308261D5006571D8 /* siriKitMedicine.swift in Sources */,
 				9FD173D2307FF0DD006571D8 /* PetConditionClassifier 1.mlmodel in Sources */,
@@ -745,6 +752,7 @@
 				9F524A973083FC30005D5830 /* healthTimelineUI.swift in Sources */,
 				9F92188B3073E6CE00A3D0A8 /* login.swift in Sources */,
 				9F68D8D9307575F300228A18 /* onbaording.swift in Sources */,
+				9F7E6C39308943A5007F91EB /* petWeightService.swift in Sources */,
 				9F68D8D53075757D00228A18 /* welcomeScreen.swift in Sources */,
 				9F06D5173076D99800B191AD /* tabBarView.swift in Sources */,
 				9F9E75F33074D89300E39EC9 /* authService.swift in Sources */,
