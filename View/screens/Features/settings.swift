@@ -97,7 +97,7 @@ struct Settings: View {
                                 label: "Change password",
                                 iconColor: PetPawColors.attention
                             ) {
-//                                sendPasswordReset()
+                               sendPasswordReset()
                             }
                         }
 
@@ -251,7 +251,13 @@ struct Settings: View {
 
    private func sendPasswordReset() 
    {
-   //TODO
+    guard let email = authViewModel.authService.currentUser?.email else { return }
+        authViewModel.authService.resetPassword(email: email) { success in
+            passwordResetMessage = success
+                ? "A password reset link has been sent to \(email)."
+                : "Couldn't send the reset email. Please try again."
+            showPasswordResetAlert = true
+        }
    }
 }
 
