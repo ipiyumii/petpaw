@@ -19,7 +19,7 @@ struct UserProfileScreen: View {
 
     @StateObject private var viewModel = ProfileViewModel()
 
-    @State private var selectedPhoto: UIImage?
+    // @State private var selectedPhoto: UIImage?
     @State private var showPhotoPicker = false
     @State private var editingField: ProfileField?
     @State private var heroScale: CGFloat = 0.85
@@ -52,7 +52,10 @@ struct UserProfileScreen: View {
             }
         }
         .sheet(isPresented: $showPhotoPicker) {
-            selectImage(image: $selectedPhoto, isPresented: $showPhotoPicker)
+            selectImage(
+                image: $viewModel.selectedPhoto,
+                isPresented: $showPhotoPicker
+            )
         }
         .task {
             await loadProfile()
@@ -295,6 +298,10 @@ struct UserProfileScreen: View {
                 }
 
         await viewModel.loadProfile(uid: uid)
+    }
+
+    private var selectedPhoto: UIImage? {
+        viewModel.selectedPhoto
     }
 }
 
