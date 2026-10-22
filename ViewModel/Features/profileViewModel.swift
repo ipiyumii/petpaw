@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 @MainActor
 final class ProfileViewModel: ObservableObject {
@@ -13,6 +14,7 @@ final class ProfileViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isSaving = false
     @Published var errorMessage: String?
+    @Published var selectedPhoto: UIImage?
 
     private var originalProfile: UserProfile?
     private let service: UserProfileServiceProtocol
@@ -22,12 +24,15 @@ final class ProfileViewModel: ObservableObject {
     }
 
     var hasUnsavedChanges: Bool {
-        guard let profile = profile else { return false }
-        guard let originalProfile = originalProfile else { return false }
+        guard let profile = profile,
+            let originalProfile = originalProfile else {
+            return false
+        }
 
         return profile.fullName != originalProfile.fullName ||
-               profile.phoneNumber != originalProfile.phoneNumber ||
-               profile.bio != originalProfile.bio
+            profile.phoneNumber != originalProfile.phoneNumber ||
+            profile.bio != originalProfile.bio ||
+            selectedPhoto != nil
     }
 
     func loadProfile(uid: String) async {
